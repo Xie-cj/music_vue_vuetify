@@ -6,6 +6,7 @@ export default {
 }
 
 function get (url, params) {
+    params.withCredentials = true
     return new Promise((resolve, reject) => {
         Vue.axios.get(url, {
             params: params
@@ -17,6 +18,7 @@ function get (url, params) {
     })
 }
 function post (url, params = {}) {
+    params.withCredentials = true
     return new Promise((resolve, reject) => {
         Vue.axios.post(url, QS.stringify(params))
         .then(res => {
