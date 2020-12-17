@@ -9,6 +9,9 @@ import '@/plugins'
 import config from '@/config'
 Vue.prototype.$config = config
 
+import api from '@/config/api.js'
+Vue.prototype.$api = api
+
 Vue.config.productionTip = false
 
 new Vue({

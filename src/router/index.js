@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import { title } from '@/config'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -9,17 +11,14 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    menu: {
+    meta: {
       title: '首页'
     }
   },
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   }
 ]
 
@@ -28,11 +27,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.menu.title) {
-    document.title = `${to.menu.title} - ${Vue.$config.title}`
+  document.title = title
+  if (to.meta.title) {
+    document.title = `${to.meta.title} - ${title}`
   } else {
-    document.title = Vue.$config.title
+    document.title = title
   }
+  next()
 })
 
 export default router
