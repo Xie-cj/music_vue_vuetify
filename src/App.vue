@@ -7,20 +7,25 @@
         dark
         :collapse="!hover"
       >
-        <div style="width: 100%" class="d-flex justify-space-between align-center">
-          <v-btn
+      <transition name="scale-transition">
+        <v-btn
+          style="position: absolute;"
+          v-if="hover"
+          fab
+          dark
+          small
+          color="rgba(255,255,255,.15)"
+        >
+          <v-icon
+            x-large
             v-if="hover"
-            class="mx-2"
-            fab
-            dark
-            small
-            color="pink"
+            transition="scale-transition"
           >
-            <v-icon dark>
-              mdi-heart
-            </v-icon>
-          </v-btn>
-          
+            mdi-chevron-left
+          </v-icon>
+        </v-btn>
+      </transition>
+        <div style="width: 100%" class="d-flex justify-center align-center">
           <div class="d-flex align-center">
             <v-img
               alt="Vuetify Logo"
@@ -32,7 +37,6 @@
             />
             <span class="text-h5">{{$config.title}}</span>
           </div>
-          <i></i>
         </div>
       </v-app-bar>
     </v-hover>

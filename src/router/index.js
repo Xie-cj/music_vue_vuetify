@@ -8,7 +8,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    menu: {
+      title: '首页'
+    }
   },
   {
     path: '/about',
@@ -22,6 +25,14 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.menu.title) {
+    document.title = `${to.menu.title} - ${Vue.$config.title}`
+  } else {
+    document.title = Vue.$config.title
+  }
 })
 
 export default router
