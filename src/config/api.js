@@ -6,7 +6,7 @@ export default {
 }
 
 function get (url, params) {
-    params.withCredentials = true
+    params ? params.withCredentials = true : params = { withCredentials: true }
     return new Promise((resolve, reject) => {
         Vue.axios.get(url, {
             params: params
