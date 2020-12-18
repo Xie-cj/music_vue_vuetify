@@ -8,13 +8,14 @@
             :show-arrows="$vuetify.breakpoint.name !== 'xs'"
         >
             <v-carousel-item
-                @touchmove.prevent
                 class="carousel-item"
                 v-for="(item, index) in banners"
                 :key="index"
                 :src="`${item.imageUrl}?param=1080y400`"
                 :lazy-src="`${item.imageUrl}?param=270y100`"
                 :eager="true"
+                @touchmove.prevent
+                @click.stop="bannerClick(item)"
             ></v-carousel-item>
         </v-carousel>
     </v-responsive>
@@ -32,6 +33,9 @@ export default {
     components: {
     },
     methods: {
+        bannerClick(item) {
+            console.log(item)
+        }
     },
     data: () => ({
     })
@@ -40,11 +44,10 @@ export default {
 
 <style lang="scss" scoped>
 .banner-box {
-    max-width: 1200px;
-    margin: 0 auto;
     overflow: hidden;
     .carousel-item {
         position: relative;
+        cursor: pointer;
     }
     ::v-deep .v-carousel__controls {
         height: 22px;
@@ -61,6 +64,7 @@ export default {
         .v-item--active.v-btn--active {
             .v-icon {
                 opacity: 1;
+                font-size: 24px !important;
             }
         }
     }

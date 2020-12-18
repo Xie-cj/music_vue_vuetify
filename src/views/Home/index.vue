@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <v-container>
-            <Carousel :banners="banners"/>
+            <Carousel class="carousel" :banners="banners"/>
         </v-container>
     </div>
 </template>
@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
     .home {
-        .banner-box {
+        .carousel {
             max-width: 1200px;
             margin: 0 auto;
         }
