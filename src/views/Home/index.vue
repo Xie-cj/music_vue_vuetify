@@ -1,0 +1,40 @@
+<template>
+    <div class="home">
+        <v-container>
+            <Carousel :banners="banners"/>
+        </v-container>
+    </div>
+</template>
+
+<script>
+import Carousel from './Carousel'
+
+export default {
+    name: 'Home',
+    components: {
+        Carousel
+    },
+    created() {
+        this.getBanner()
+    },
+    methods: {
+        getBanner() {
+            this.$api.banner().then(res => {
+                this.banners = res.banners
+            })
+        }
+    },
+    data: () => ({
+        banners: []
+    })
+}
+</script>
+
+<style lang="scss" scoped>
+    .home {
+        .banner-box {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    }
+</style>

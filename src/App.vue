@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-hover v-slot="{ hover }">
+    <v-hover open-delay="100" close-delay="200" v-slot="{ hover }">
       <v-app-bar
         app
-        color="blue darken-1"
+        :color="$config.mainColor"
         dark
         :collapse="!hover && completeHead"
         min-width="180"
