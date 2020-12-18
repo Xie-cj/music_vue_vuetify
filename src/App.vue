@@ -42,7 +42,9 @@
     </v-hover>
 
     <v-main>
-      <router-view />
+      <v-container>
+        <router-view />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -57,6 +59,8 @@ export default {
   data: () => ({
     logoImg: require('@/assets/logo.png')
   }),
+  methods: {
+  },
   computed: {
     foldHead () {
       switch (this.$vuetify.breakpoint.name) {

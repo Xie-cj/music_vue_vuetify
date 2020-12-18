@@ -1,11 +1,14 @@
 <template>
     <v-responsive class="banner-box rounded-lg" width="100%" :aspect-ratio="27/10">
+        <!-- cycle -->
         <v-carousel
+            
             interval="3000"
             height="100%"
             hide-delimiter-background
             delimiter-icon="mdi-minus"
-            :show-arrows="$vuetify.breakpoint.name !== 'xs'"
+            :show-arrows="$vuetify.breakpoint.name !== 'xs' && Boolean(banners.length)"
+            show-arrows-on-hover
         >
             <v-carousel-item
                 class="carousel-item"
@@ -16,7 +19,17 @@
                 :eager="true"
                 @touchmove.prevent
                 @click.stop="bannerClick(item)"
-            ></v-carousel-item>
+            >
+                <v-sheet
+                    class="badge"
+                    :style="{fontSize: fontSize + 'px', padding: `${fontSize / 4  + 'px'} ${fontSize / 2  + 'px'}` }"
+                    bottom
+                    inline
+                    v-if="item.typeTitle"
+                    :color="item.titleColor || $config.mainColor"
+                    v-text="item.typeTitle"
+                ></v-sheet>
+            </v-carousel-item>
         </v-carousel>
     </v-responsive>
 </template>
@@ -24,33 +37,62 @@
 <script>
 export default {
     name: 'Home',
-    props: {
-        banners: {
-            type: Array,
-            default: []
-        }
-    },
     components: {
     },
+    created() {
+        this.getBanner()
+    },
     methods: {
+        getBanner() {
+            this.$api.banner().then(res => {
+                this.banners = res.banners
+            })
+        },
         bannerClick(item) {
             console.log(item)
         }
     },
     data: () => ({
-    })
+        banners: []
+    }),
+    computed: {
+        fontSize() {
+            switch (this.$vuetify.breakpoint.name) {
+                case 'xs': return 10
+                case 'sm': return 12
+                case 'md': return 14
+                case 'lg': return 16
+                case 'xl': return 18
+            }
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .banner-box {
     overflow: hidden;
+    background-color: rgba($color: #000000, $alpha: .05);
     .carousel-item {
         position: relative;
         cursor: pointer;
+        .badge {
+            pointer-events: none;
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            bottom: 0;
+            padding: 3px 6px;
+            border-radius: 9px 0 0 0;
+        }
     }
     ::v-deep .v-carousel__controls {
         height: 22px;
+        position: absolute;
+        width: auto;
+        min-width: 200px;
+        left: 50% !important;
+        transform: translateX(-50%);
         .v-btn--icon.v-size--small {
             width: 20px;
             height: 20px;

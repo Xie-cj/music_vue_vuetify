@@ -1,8 +1,6 @@
 <template>
     <div class="home">
-        <v-container>
-            <Carousel class="carousel" :banners="banners"/>
-        </v-container>
+        <Carousel class="carousel"/>
     </div>
 </template>
 
@@ -14,18 +12,7 @@ export default {
     components: {
         Carousel
     },
-    created() {
-        this.getBanner()
-    },
-    methods: {
-        getBanner() {
-            this.$api.banner().then(res => {
-                this.banners = res.banners
-            })
-        }
-    },
     data: () => ({
-        banners: []
     })
 }
 </script>
