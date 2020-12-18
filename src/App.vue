@@ -5,13 +5,13 @@
         app
         :color="$config.mainColor"
         dark
-        :collapse="!hover && completeHead"
+        :collapse="!hover && foldHead"
         min-width="180"
       >
       <transition name="scale-transition">
         <v-btn
           style="position: absolute;"
-          v-show="hover || !completeHead"
+          v-show="hover || !foldHead"
           fab
           dark
           small
@@ -58,7 +58,7 @@ export default {
     logoImg: require('@/assets/logo.png')
   }),
   computed: {
-    completeHead () {
+    foldHead () {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return false
         case 'sm': return false

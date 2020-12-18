@@ -4,8 +4,8 @@
             interval="3000"
             height="100%"
             hide-delimiter-background
-            show-arrows-on-hover
             delimiter-icon="mdi-minus"
+            :show-arrows="$vuetify.breakpoint.name !== 'xs'"
         >
             <v-carousel-item
                 @touchmove.prevent
