@@ -1,8 +1,8 @@
 <template>
-    <v-responsive class="banner-box rounded-lg" width="100%" :aspect-ratio="27/10">
-        <!-- cycle -->
+    <v-responsive class="banner-box bj05 rounded-lg" width="100%" :aspect-ratio="27/10">
+        <!-- cycle 自动轮播 -->
         <v-carousel
-            
+            cycle
             interval="3000"
             height="100%"
             hide-delimiter-background
@@ -57,12 +57,13 @@ export default {
     }),
     computed: {
         fontSize() {
-            switch (this.$vuetify.breakpoint.name) {
-                case 'xs': return 10
-                case 'sm': return 12
-                case 'md': return 14
-                case 'lg': return 16
-                case 'xl': return 18
+            return this.$fontSize()
+        }
+    },
+    watch: {
+        banners(val) {
+            if(val.length) {
+                this.$emit('onLoad')
             }
         }
     }
@@ -72,7 +73,6 @@ export default {
 <style lang="scss" scoped>
 .banner-box {
     overflow: hidden;
-    background-color: rgba($color: #000000, $alpha: .05);
     .carousel-item {
         position: relative;
         cursor: pointer;

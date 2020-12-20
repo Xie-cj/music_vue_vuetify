@@ -2,7 +2,8 @@ import Vue from 'vue'
 import QS from 'qs'
 
 export default {
-    banner: p => get('/banner')
+    banner: p => get('/banner'),
+    personalized: p => get('/personalized', p)
 }
 
 function get (url, params) {
