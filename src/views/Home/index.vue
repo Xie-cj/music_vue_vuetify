@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <v-overlay :value="!loading">
+        <v-overlay :value="!loading" z-index="9">
             <v-progress-circular
                 :size="70"
                 :width="7"
