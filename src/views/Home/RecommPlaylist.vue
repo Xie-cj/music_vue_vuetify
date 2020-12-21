@@ -20,12 +20,19 @@
                     <v-hover
                         v-slot:default="{ hover }"
                     >
-                        <v-responsive :class="hover || fontSize <= 10 ? 'hover' : ''" class="list-item rounded-lg bj05 elevation-6" :aspect-ratio="1/1">
+                        <v-responsive
+                            v-ripple
+                            :class="hover || fontSize <= 10 ? 'hover elevation-6' : ''"
+                            class="list-item rounded-lg bj05"
+                            :aspect-ratio="1/1"
+                        >
                             <v-img
+                                width="100%"
+                                height="100%"
                                 :src="item.picUrl"
-                                :lazy-src="`${item.picUrl}?param=24y24`"
+                                :lazy-src="`${item.picUrl}?param=27y27`"
                             ></v-img>
-                            <div v-ripple :style="{fontSize: fontSize2 + 'px'}" class="text">
+                            <div :style="{fontSize: fontSize2 + 'px'}" class="text">
                                 <p class="title">{{item.name}}</p>
                             </div>
                         </v-responsive>
@@ -58,6 +65,7 @@ export default {
     created() {
         this.$api.personalized({limit: 6}).then(res => {
             this.listData = res.result
+            this.$emit('onLoad')
         })
     },
     computed: {
@@ -67,7 +75,14 @@ export default {
         fontSize2() {
             return this.$fontSize2()
         }
-    }
+    },
+    // watch: {
+    //     listData(val) {
+    //         if(val.length) {
+    //             this.$emit('onLoad')
+    //         }
+    //     }
+    // }
 }
 </script>
 

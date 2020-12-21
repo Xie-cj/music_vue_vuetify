@@ -1,6 +1,10 @@
 <template>
-    <v-responsive class="banner-box bj05 rounded-lg" width="100%" :aspect-ratio="27/10">
-        <!-- cycle 自动轮播 -->
+    <v-responsive
+        class="banner-box bj05 rounded-lg"
+        width="100%"
+        :aspect-ratio="27/10"
+        @touchmove.prevent
+    >
         <v-carousel
             cycle
             interval="3000"
@@ -17,7 +21,7 @@
                 :src="`${item.imageUrl}?param=1080y400`"
                 :lazy-src="`${item.imageUrl}?param=270y100`"
                 :eager="true"
-                @touchmove.prevent
+                
                 @click.stop="bannerClick(item)"
             >
                 <v-sheet
@@ -46,6 +50,7 @@ export default {
         getBanner() {
             this.$api.banner().then(res => {
                 this.banners = res.banners
+                this.$emit('onLoad')
             })
         },
         bannerClick(item) {
@@ -60,13 +65,13 @@ export default {
             return this.$fontSize()
         }
     },
-    watch: {
-        banners(val) {
-            if(val.length) {
-                this.$emit('onLoad')
-            }
-        }
-    }
+    // watch: {
+    //     banners(val) {
+    //         if(val.length) {
+    //             this.$emit('onLoad')
+    //         }
+    //     }
+    // }
 }
 </script>
 

@@ -9,23 +9,24 @@
             ></v-progress-circular>
         </v-overlay>
         <Carousel @onLoad="carouselOnLoad" class="carousel"/>
-        <RecommPlaylist class="recomm" />
+        <RecommPlayList @onLoad="RecommPlayListOnLoad" class="recomm" />
     </div>
 </template>
 
 <script>
 import Carousel from './Carousel'
-import RecommPlaylist from './RecommPlaylist'
+import RecommPlayList from './RecommPlayList'
 
 export default {
     name: 'Home',
     components: {
         Carousel,
-        RecommPlaylist
+        RecommPlayList
     },
     data: () => ({
         onLoad: {
-            carouse: false
+            carouse: false,
+            RecommPlayList: false
         }
     }),
     computed: {
@@ -40,6 +41,9 @@ export default {
     methods: {
         carouselOnLoad() {
             this.onLoad.carouse = true
+        },
+        RecommPlayListOnLoad() {
+            this.onLoad.RecommPlayList = true
         }
     }
 }
@@ -47,10 +51,7 @@ export default {
 
 <style lang="scss" scoped>
     .home {
-        .carousel,
-        .recomm {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        max-width: 1400px;
+        margin: 0 auto;
     }
 </style>
