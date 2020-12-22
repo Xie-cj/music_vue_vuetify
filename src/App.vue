@@ -17,6 +17,8 @@ import Vue from 'vue'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
+import { createSimpleTransition } from 'vuetify/lib/components/transitions/createTransition'
+
 export default {
   name: 'App',
   components: {
@@ -28,6 +30,9 @@ export default {
   methods: {
   },
   created() {
+    const myTransition = createSimpleTransition('player-transition')
+    Vue.component('player-transition', myTransition)
+
     Vue.prototype.$fontSize = () => {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 10
@@ -51,7 +56,26 @@ export default {
 </script>
 
 <style lang="scss">
+:root {
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
 .bj05 {
   background-color: rgba(0, 0, 0, .05);
+}
+.player-transition {
+  &-leave-active {
+    position: absolute;
+  }
+  &-enter-active, &-leave, &-leave-to {
+    transition: .25s ease-in-out;
+  }
+  &-enter, &-leave-to {
+    transform: translateY(100%);
+  }
+  &-enter {
+    transition: .1s ease-in-out;
+  }
 }
 </style>

@@ -5,25 +5,24 @@
             attach
             fullscreen
             v-model="show"
-            transition="scale-transition"
-            :origin="`${initialPosition[0]}px ${initialPosition[1]}px`"
+            transition="player-transition"
         >
             <PlayDetails @close="show = false" />
         </v-dialog>
         <v-footer class="music-footer">
-            <div :style="{height: footerHeight}" class="footer-main elevation-6 rounded-t">
+            <div  v-ripple :style="{height: footerHeight}" class="footer-main elevation-6 rounded-t">
                 <v-hover
                     v-slot:default="{ hover }"
                 >
                     <v-responsive
                         :style="{width: footerHeight}"
                         :aspect-ratio="1/1"
-                        @click="showPlayDetails"
+                        @click="show = true"
                     >
                         <v-img :src="'https://p2.music.126.net/lrgv2NsmAyoXkH7Gen3MBw==/109951165222113252.jpg'"></v-img>
                         <div
                             class="shade"
-                            :class="hover || $fontSize() <= 12 ? 'unfold' : ''"
+                            :class="hover && $fontSize() > 12 ? 'unfold' : ''"
                         >
                             <svg style="width: 100%; height: 100%; transform: rotate(45deg); opacity: .8;" t="1608568898652" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8396" width="128" height="128"><path d="M554.666667 857.6l98.133333-98.133333 29.866667 29.866666-149.333334 149.333334L384 789.333333l29.866667-29.866666 98.133333 98.133333V597.333333h42.666667v260.266667z m0-691.2V426.666667h-42.666667V166.4L413.866667 264.533333 384 234.666667 533.333333 85.333333 682.666667 234.666667l-29.866667 29.866666L554.666667 166.4z" fill="#dbdbdb" p-id="8397"></path></svg>
                         </div>
@@ -38,33 +37,28 @@
 import PlayDetails from './PlayDetails'
 
 export default {
-   name: 'music-footer',
-   components: {
-       PlayDetails
-   },
-   data () {
-       return {
-           show: false,
-           initialPosition: []
-       }
-   },
-   methods: {
-       showPlayDetails(e) {
-            this.initialPosition = [e.clientX, e.clientY]
-            this.show = true
-       }
-   },
-   computed: {
-       footerHeight() {
+    name: 'music-footer',
+    components: {
+        PlayDetails
+    },
+    data () {
+        return {
+            show: false
+        }
+    },
+    methods: {
+    },
+    computed: {
+        footerHeight() {
             switch (this.$vuetify.breakpoint.name) {
-                case 'xs': return '80px'
-                case 'sm': return '72px'
+                case 'xs': return '48px'
+                case 'sm': return '56px'
                 case 'md': return '64px'
                 case 'lg': return '72px'
                 case 'xl': return '80px'
             }
-       }
-   }
+        }
+    }
 }
 </script>
 
