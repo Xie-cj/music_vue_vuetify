@@ -1,10 +1,19 @@
 <template>
   <v-app>
     <MusicHeader />
-
+    <v-overlay :value="!loading" z-index="9">
+      <v-progress-circular
+          :size="70"
+          :width="7"
+          :color="$config.mainColor"
+          indeterminate
+      ></v-progress-circular>
+    </v-overlay>
     <v-main>
       <v-container>
-        <router-view />
+        <transition name="scroll-y-transition" mode="out-in">
+          <router-view />
+        </transition>
       </v-container>
     </v-main>
 
@@ -14,6 +23,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
@@ -27,6 +37,9 @@ export default {
   },
   data: () => ({
   }),
+  computed: mapState([
+    'loading'
+  ]),
   methods: {
   },
   created() {

@@ -32,7 +32,7 @@
                                 :src="item.picUrl"
                                 :lazy-src="`${item.picUrl}?param=27y27`"
                             ></v-img>
-                            <div :style="{fontSize: fontSize2 + 'px'}" class="text">
+                            <div v-show="item.name" :style="{fontSize: fontSize2 + 'px'}" class="text">
                                 <p class="title">{{item.name}}</p>
                             </div>
                         </v-responsive>
@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            listData: []
+            listData: [{id: 1},{id: 2},{id: 3},{id: 4},{id: 5},{id: 6}]
         }
     },
     methods: {

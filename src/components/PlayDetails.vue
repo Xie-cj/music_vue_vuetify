@@ -1,10 +1,14 @@
 <template>
     <div class="play-details">
-        <span @click="$emit('close')">×</span>
         <v-img
             class="bj"
             :src="imgUrl"
+            :lazy-src="imgUrl + '?param=128y128'"
+            transition="fade-transition"
         ></v-img>
+        <div class="content">
+            <span @click="$emit('close')">×</span>
+        </div>
     </div>
 </template>
 
@@ -13,13 +17,13 @@ export default {
     name: 'play-details',
     data() {
         return {
-            imgUrl: ''
+            imgUrl: 'https://p1.music.126.net/pI-Nf1Y7IIckBEIhGGR8mA==/109951165572687041.jpg'
         }
     },
     created() {
         setTimeout(() => {
-            this.imgUrl = 'https://p2.music.126.net/lrgv2NsmAyoXkH7Gen3MBw==/109951165222113252.jpg'
-        }, 200)
+            this.imgUrl = 'https://p2.music.126.net/rPrQVPau1RukWWU4u1UYqA==/109951165559573991.jpg'
+        }, 3500)
     }
 }
 </script>
@@ -32,6 +36,8 @@ export default {
         background-color: #fff;
         position: relative;
         z-index: 1;
+        background-size: cover;
+        background-position: center;
         .bj {
             transform: scale(1.2);
             position: absolute;
@@ -41,6 +47,15 @@ export default {
             height: 100%;
             z-index: -1;
             filter: blur(30px);
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba($color: #000000, $alpha: .6);
+            backdrop-filter: blur(30px);
         }
     }
 </style>

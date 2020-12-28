@@ -1,19 +1,12 @@
 <template>
     <div class="home">
-        <v-overlay :value="!loading" z-index="9">
-            <v-progress-circular
-                :size="70"
-                :width="7"
-                :color="$config.mainColor"
-                indeterminate
-            ></v-progress-circular>
-        </v-overlay>
         <Carousel @onLoad="carouselOnLoad" class="carousel"/>
         <RecommPlayList @onLoad="RecommPlayListOnLoad" class="recomm" />
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Carousel from './Carousel'
 import RecommPlayList from './RecommPlayList'
 
@@ -29,16 +22,22 @@ export default {
             RecommPlayList: false
         }
     }),
-    computed: {
-        loading() {
-            let isLoading = true
-            if(Object.values(this.onLoad).includes(false)) {
-                isLoading = false
-            }
-            return isLoading
+    watch: {
+        onLoad: {
+            handler(val) {
+                let isLoading = true
+                if(Object.values(val).includes(false)) {
+                    isLoading = false
+                }
+                this.setLoading(isLoading)
+            },
+            deep: true
         }
     },
     methods: {
+        ...mapMutations([
+            'setLoading'
+        ]),
         carouselOnLoad() {
             this.onLoad.carouse = true
         },
