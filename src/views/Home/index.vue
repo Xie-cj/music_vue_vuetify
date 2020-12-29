@@ -44,7 +44,10 @@ export default {
         RecommPlayListOnLoad() {
             this.onLoad.RecommPlayList = true
         }
-    }
+    },
+    created() {
+        this.setLoading(false)
+    },
 }
 </script>
 

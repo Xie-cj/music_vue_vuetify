@@ -1,11 +1,5 @@
 <template>
-    <div class="play-details">
-        <v-img
-            class="bj"
-            :src="imgUrl"
-            :lazy-src="imgUrl + '?param=128y128'"
-            transition="fade-transition"
-        ></v-img>
+    <div class="play-details" :style="{backgroundImage: `url(${imgUrl}?param=128y128)`}">
         <div class="content">
             <span @click="$emit('close')">×</span>
         </div>
@@ -38,16 +32,7 @@ export default {
         z-index: 1;
         background-size: cover;
         background-position: center;
-        .bj {
-            transform: scale(1.2);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            filter: blur(30px);
-        }
+        transition: background-image 1s;
         .content {
             width: 100%;
             height: 100%;

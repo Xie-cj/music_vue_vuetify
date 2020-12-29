@@ -17,9 +17,9 @@
                     <v-responsive
                         :style="{width: footerHeight}"
                         :aspect-ratio="1/1"
-                        @click="show = true"
+                        @click="showDetails()"
                     >
-                        <v-img :src="'https://p2.music.126.net/rPrQVPau1RukWWU4u1UYqA==/109951165559573991.jpg'"></v-img>
+                        <v-img height="100%" :src="'https://p2.music.126.net/rPrQVPau1RukWWU4u1UYqA==/109951165559573991.jpg'"></v-img>
                         <div
                             class="shade"
                             :class="hover && $fontSize() > 10 ? 'unfold' : ''"
@@ -48,7 +48,18 @@ export default {
     },
     methods: {
         bottomClick() {
-            console.log(this.$fontSize() < 12)
+            if(this.$fontSize() < 12) {
+                this.showDetails()
+            }
+        },
+        showDetails() {
+            if(this.$fontSize() < 12) {
+                setTimeout(() => {
+                    this.show = true
+                }, 250)
+            } else {
+                this.show = true
+            }
         }
     },
     computed: {

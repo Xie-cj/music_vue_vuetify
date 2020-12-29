@@ -64,7 +64,24 @@ export default {
         case 'xl': return 16
       }
     }
-  }
+
+    // 监听浏览器返回事件
+    if (window.history && window.history.pushState) {
+      window.onpopstate = function(e) {
+        console.log(e)
+      }
+    }
+  },
+  mounted () {
+    // 挂载时添加监控返回键
+    // if (window.history && window.history.pushState) {
+    //   window.addEventListener('popstate', (e) => {console.log(e)}, false);
+    // }
+  },
+  destroyed () {
+    // 销毁时删除监控返回键
+    // window.removeEventListener('popstate', () => {console.log(1)}, false);
+  },
 };
 </script>
 

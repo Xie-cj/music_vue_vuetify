@@ -16,7 +16,7 @@
                         dark
                         small
                         color="rgba(255,255,255,.15)"
-                        @click="$router.back()"
+                        @click.stop="$router.back()"
                     >
                         <v-icon
                             x-large
@@ -51,7 +51,7 @@ export default ({
         logoImg: require('@/assets/logo.png')
     }),
     computed: {
-        foldHead () {
+        foldHead() {
             if(this.$fontSize() <= 12) {
                 return false
             } else {

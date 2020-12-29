@@ -6,12 +6,13 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     // 全局加载提示
-    loading: false
+    loading: true,
+    // 历史记录长度
+    historyLength: parseInt(sessionStorage.getItem('historyLength')) || 1
   },
   mutations: {
     // 设置全局加载提示
     setLoading(state, value) {
-      // state.loading = value
       if(!value) {
         state.loading = value
       } else {
@@ -20,6 +21,11 @@ export default new Vuex.Store({
           state.loading = value
         }, 500);
       }
+    },
+    setHistoryLength(state, value) {
+      state.historyLength += value
+      console.log(value)
+      sessionStorage.setItem('historyLength', state.historyLength)
     }
   },
   actions: {
