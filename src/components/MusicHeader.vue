@@ -1,5 +1,5 @@
 <template>
-  <div class="music-header" @click="$router.push('/about')">
+  <div class="music-header">
     <v-hover open-delay="100" close-delay="200" v-slot="{ hover }">
       <v-app-bar
         app
@@ -31,8 +31,15 @@
             </v-icon>
           </v-btn>
         </transition>
-        <div style="width: 100%" class="d-flex justify-center align-center">
-          <div class="d-flex align-center">
+        <div
+          style="width: 100%;"
+          class="d-flex justify-center align-center"
+        >
+          <div
+            style="cursor: pointer;"
+            class="d-flex align-center"
+            @click="$router.push('/about')"
+          >
             <v-img
               alt="Vuetify Logo"
               class="shrink mr-2"
@@ -76,8 +83,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.music-header {
-}
-</style>

@@ -20,7 +20,7 @@
           <v-responsive
             :style="{ width: footerHeight }"
             :aspect-ratio="1 / 1"
-            @click="showDetails()"
+            @click.stop="showDetails()"
           >
             <v-img
               height="100%"
@@ -115,7 +115,7 @@ export default {
   z-index: 6;
   bottom: 0;
   .music-footer {
-    background-color: #fff !important;
+    background-color: transparent !important;
     padding: 0 !important;
     .footer-main {
       width: 100%;

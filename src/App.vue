@@ -1,7 +1,7 @@
 <template>
   <v-app :style="{backgroundColor: $config.bjColor}">
     <MusicHeader />
-    <v-overlay :value="!loading" z-index="9">
+    <v-overlay @touchmove.stop.prevent :value="!loading" z-index="9">
       <v-progress-circular
         :size="70"
         :width="7"
@@ -12,7 +12,7 @@
     <v-main>
       <v-container>
         <transition name="scroll-y-transition" mode="out-in">
-          <router-view />
+          <router-view :style="{width: '100%', height: '100%'}"/>
         </transition>
       </v-container>
     </v-main>

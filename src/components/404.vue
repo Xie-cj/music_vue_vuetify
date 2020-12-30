@@ -1,6 +1,6 @@
 <template>
   <div class="not-found">
-    <v-responsive :aspect-ratio="38/50" class="not-found-main">
+    <v-responsive :aspect-ratio="38 / 50" class="not-found-svg-box">
       <svg
         width="100%"
         viewBox="0 0 837 1060"
@@ -54,11 +54,15 @@
           ></path>
         </g>
       </svg>
-      <div class="text" :style="{fontSize: `${$fontSize() * 2}px`}">
-        <p class="t404">404</p>
-        <p>找不到页面</p>
-      </div>
     </v-responsive>
+    <div
+      class="text"
+      :class="$fontSize() < 12 && 'abs'"
+      :style="{ fontSize: `${$fontSize2() * 2}px` }"
+    >
+      <p class="t404">404</p>
+      <p>找不到页面</p>
+    </div>
   </div>
 </template>
 
@@ -77,22 +81,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  &-main {
+  &-svg-box {
     width: 100%;
     max-width: 380px;
     display: flex;
     justify-content: center;
     align-items: center;
-    .text {
-      position: relative;
-      z-index: 1;
-      font-weight: bold;
-      text-align: center;
-      .t404 {
-        font-size: 2em;
-        margin: 0;
-      }
-    }
     svg {
       position: absolute;
       top: 50%;
@@ -100,6 +94,22 @@ export default {
       z-index: 0;
     }
   }
+  .text {
+      position: relative;
+      z-index: 1;
+      font-weight: bold;
+      &.abs {
+        position: absolute;
+        text-align: center;
+      }
+      p {
+        font-size: 1.2em;
+        margin: 0;
+        &.t404 {
+          font-size: 2.4em;
+        }
+      }
+    }
 
   #Polygon-1,
   #Polygon-2,
