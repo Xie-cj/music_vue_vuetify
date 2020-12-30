@@ -27,8 +27,6 @@ import { mapState } from 'vuex'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
-import { createSimpleTransition } from 'vuetify/lib/components/transitions/createTransition'
-
 export default {
   name: 'App',
   components: {
@@ -43,9 +41,6 @@ export default {
   methods: {
   },
   created() {
-    const myTransition = createSimpleTransition('player-transition')
-    Vue.component('player-transition', myTransition)
-
     Vue.prototype.$fontSize = () => {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 10
@@ -64,24 +59,7 @@ export default {
         case 'xl': return 16
       }
     }
-
-    // 监听浏览器返回事件
-    if (window.history && window.history.pushState) {
-      window.onpopstate = function(e) {
-        console.log(e)
-      }
-    }
-  },
-  mounted () {
-    // 挂载时添加监控返回键
-    // if (window.history && window.history.pushState) {
-    //   window.addEventListener('popstate', (e) => {console.log(e)}, false);
-    // }
-  },
-  destroyed () {
-    // 销毁时删除监控返回键
-    // window.removeEventListener('popstate', () => {console.log(1)}, false);
-  },
+  }
 };
 </script>
 
@@ -93,19 +71,5 @@ export default {
 }
 .bj05 {
   background-color: rgba(0, 0, 0, .05);
-}
-.player-transition {
-  &-leave-active {
-    position: absolute;
-  }
-  &-enter-active, &-leave, &-leave-to {
-    transition: .25s ease-in-out;
-  }
-  &-enter, &-leave-to {
-    transform: translateY(100%);
-  }
-  &-enter {
-    transition: .1s ease-in-out;
-  }
 }
 </style>

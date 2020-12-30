@@ -9,7 +9,6 @@ import { title } from '@/config'
 // 改写push方法
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
-  store.commit('setHistoryLength', 1)
   return originalPush.call(this, location).catch(err => err)
 }
 
@@ -52,15 +51,24 @@ router.afterEach((to, from) => {
   } else {
     document.title = title
   }
+
+  // 记录路由
+  if(to.name !== from.name) {
+    let arr = store.state.historyArr.slice()
+    if(arr[arr.length - 2] && (arr[arr.length - 2] === to.name)) {
+      arr.pop()
+    } else {
+      arr.push(to.name)
+    }
+    store.commit('setHistoryArr', arr)
+  }
 })
 
 // 节流
 let state = true
 router.back = function() {
-  if(state && store.state.historyLength > 1) {
-    // 历史记录大于1，返回上页
+  if(state) {
     state = false
-    store.commit('setHistoryLength', -1)
     this.go(-1)
     setTimeout(() => {
       state = true

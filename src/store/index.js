@@ -8,7 +8,7 @@ export default new Vuex.Store({
     // 全局加载提示
     loading: true,
     // 历史记录长度
-    historyLength: parseInt(sessionStorage.getItem('historyLength')) || 1
+    historyArr: sessionStorage.getItem('historyArr') ? sessionStorage.getItem('historyArr').split(',') : []
   },
   mutations: {
     // 设置全局加载提示
@@ -22,10 +22,9 @@ export default new Vuex.Store({
         }, 500);
       }
     },
-    setHistoryLength(state, value) {
-      state.historyLength += value
-      console.log(value)
-      sessionStorage.setItem('historyLength', state.historyLength)
+    setHistoryArr(state, historyArr) {
+      state.historyArr = historyArr
+      sessionStorage.setItem('historyArr', state.historyArr)
     }
   },
   actions: {

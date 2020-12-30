@@ -16,13 +16,14 @@
                         dark
                         small
                         color="rgba(255,255,255,.15)"
-                        @click.stop="$router.back()"
+                        @click.stop="back()"
                     >
                         <v-icon
-                            x-large
+                            :x-large="$store.state.historyArr.length > 1"
+                            :dense="$store.state.historyArr.length <= 1"
                             transition="scale-transition"
                         >
-                            mdi-chevron-left
+                            {{$store.state.historyArr.length > 1 ? 'mdi-chevron-left' : 'mdi-home'}}
                         </v-icon>
                     </v-btn>
                 </transition>
@@ -50,6 +51,16 @@ export default ({
     data: () => ({
         logoImg: require('@/assets/logo.png')
     }),
+    methods: {
+        back() {
+            if(this.$store.state.historyArr.length > 1) {
+                this.$router.back()
+            } else {
+                this.$store.commit('setHistoryArr', [])
+                this.$router.replace('/')
+            }
+        }
+    },
     computed: {
         foldHead() {
             if(this.$fontSize() <= 12) {
