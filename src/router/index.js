@@ -27,6 +27,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
+  },
+  {
+    path: '*',
+    name: '404',
+    component: () => import('../components/404.vue')
   }
 ]
 
@@ -55,7 +60,7 @@ router.afterEach((to, from) => {
   // 记录路由
   if(to.name !== from.name) {
     let arr = store.state.historyArr.slice()
-    if(arr[arr.length - 2] && (arr[arr.length - 2] === to.name)) {
+    if(arr[arr.length - 2] === to.name) {
       arr.pop()
     } else {
       arr.push(to.name)
@@ -64,7 +69,7 @@ router.afterEach((to, from) => {
   }
 })
 
-// 节流
+// 节流,给back添加500ms冷却时间
 let state = true
 router.back = function() {
   if(state) {

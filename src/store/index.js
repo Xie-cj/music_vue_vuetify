@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     // 全局加载提示
     loading: true,
-    // 历史记录长度
+    // 历史记录
     historyArr: sessionStorage.getItem('historyArr') ? sessionStorage.getItem('historyArr').split(',') : []
   },
   mutations: {
@@ -22,6 +22,7 @@ export default new Vuex.Store({
         }, 500);
       }
     },
+    // 设置历史记录
     setHistoryArr(state, historyArr) {
       state.historyArr = historyArr
       sessionStorage.setItem('historyArr', state.historyArr)

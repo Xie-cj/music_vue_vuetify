@@ -11,4 +11,17 @@ if (process.env.NODE_ENV === 'development') {
   axios.defaults.baseURL = baseURL
 }
 axios.defaults.timeout = timeout;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+
+// 导出get方法
+export function get(url, params) {
+  params ? params.withCredentials = true : params = { withCredentials: true }
+  return new Promise((resolve, reject) => {
+    axios.get(url, {
+      params: params
+    }).then(res => {
+      resolve(res.data)
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}

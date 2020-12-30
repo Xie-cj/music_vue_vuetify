@@ -1,12 +1,12 @@
 <template>
-  <v-app>
+  <v-app :style="{backgroundColor: $config.bjColor}">
     <MusicHeader />
     <v-overlay :value="!loading" z-index="9">
       <v-progress-circular
-          :size="70"
-          :width="7"
-          :color="$config.mainColor"
-          indeterminate
+        :size="70"
+        :width="7"
+        :color="$config.mainColor"
+        indeterminate
       ></v-progress-circular>
     </v-overlay>
     <v-main>
