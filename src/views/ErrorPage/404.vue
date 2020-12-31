@@ -62,6 +62,10 @@
     >
       <p class="t404">404</p>
       <p>找不到页面</p>
+      <div class="but-box d-flex justify-space-between">
+        <div @click.stop="$router.back()" :class="$store.state.historyArr.length <= 1 ? 'disabled' : ''" class="but blue">返回上页</div>
+        <div @click.stop="goHome()" class="but red">返回首页</div>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +76,12 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    goHome() {
+      this.$store.commit('setHistoryArr', [])
+      this.$router.replace('/')
+    }
+  },
 };
 </script>
 
@@ -107,6 +116,36 @@ export default {
         margin: 0;
         &.t404 {
           font-size: 2.4em;
+        }
+      }
+      justify-content: space-between;
+      .but-box {
+        margin-top: 15px;
+        font-size: .5em;
+        .but {
+          font-weight: 400;
+          padding: 3px 10px;
+          border-radius: 99px;
+          border: 1px solid #999;
+          background-color: rgba($color: #000, $alpha: .03);
+          backdrop-filter: blur(3px);
+          transition: .25s;
+          cursor: pointer;
+          &.blue {
+            background-color: rgba($color: #2196F3, $alpha: .2) !important;
+          }
+          &.red {
+            background-color: rgba($color: #F44336, $alpha: .2) !important;
+          }
+          &:hover,
+          &:active {
+            background-color: rgba($color: #fff, $alpha: .2) !important;
+          }
+          &.disabled {
+            border-color: #ccc !important;
+            background-color: rgba($color: #ccc, $alpha: .2) !important;
+            cursor: not-allowed;
+          }
         }
       }
     }

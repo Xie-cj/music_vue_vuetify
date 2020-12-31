@@ -67,8 +67,8 @@ export default {
       if (this.$store.state.historyArr.length > 1) {
         this.$router.back();
       } else {
-        this.$route.name !== "Home" &&
-          (this.$store.commit("setHistoryArr", []), this.$router.replace("/"));
+        this.$route.name !== 'Home' &&
+          (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
       }
     },
   },

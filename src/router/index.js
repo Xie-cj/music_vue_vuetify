@@ -26,12 +26,12 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import('../views/About.vue')
+    component: () => import('../views/About')
   },
   {
     path: '*',
     name: '404',
-    component: () => import('../components/404.vue')
+    component: () => import('../views/ErrorPage/404.vue')
   }
 ]
 

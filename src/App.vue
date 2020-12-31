@@ -64,11 +64,14 @@ export default {
 </script>
 
 <style lang="scss">
+
+
 :root {
   &::-webkit-scrollbar {
     width: 0;
   }
 }
+
 .bj05 {
   background-color: rgba(0, 0, 0, .05);
 }
