@@ -59,13 +59,14 @@ router.afterEach((to, from) => {
 
   // 记录路由
   if(to.name !== from.name) {
-    let arr = store.state.historyArr.slice()
-    if(arr[arr.length - 2] === to.name) {
-      arr.pop()
+    let historyArr = store.state.historyArr.slice()
+    if(historyArr[historyArr.length - 2] === to.name) {
+      historyArr.pop()
     } else {
-      arr.push(to.name)
+      historyArr.push(to.name)
     }
-    store.commit('setHistoryArr', arr)
+    historyArr[historyArr.length - 2] === historyArr[historyArr.length - 1] && historyArr.pop()
+    store.commit('setHistoryArr', historyArr)
   }
 })
 

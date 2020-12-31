@@ -20,7 +20,7 @@
           <v-hover v-slot:default="{ hover }">
             <v-responsive
               v-ripple
-              :class="hover || fontSize <= 10 ? 'hover elevation-6' : ''"
+              :class="{'hover elevation-8': hover || fontSize <= 10, 'large-size': fontSize > 10}"
               class="list-item rounded-lg bj05"
               :aspect-ratio="1 / 1"
             >
@@ -84,14 +84,7 @@ export default {
     fontSize2() {
       return this.$fontSize2();
     },
-  },
-  // watch: {
-  //     listData(val) {
-  //         if(val.length) {
-  //             this.$emit('onLoad')
-  //         }
-  //     }
-  // }
+  }
 };
 </script>
 
@@ -105,7 +98,9 @@ export default {
         border: none !important;
       }
       .list-item {
+        transition: 0.25s;
         position: relative;
+        cursor: pointer;
         .text {
           position: absolute;
           bottom: 0;
@@ -119,7 +114,6 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          cursor: pointer;
           .title {
             font-size: 1em !important;
             line-height: 1.5em;
@@ -132,6 +126,9 @@ export default {
           }
         }
         &.hover {
+          &.large-size {
+            transform: scale(1.05);
+          }
           .text {
             height: 100%;
             .title {

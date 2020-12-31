@@ -82,6 +82,9 @@ export default {
       this.$router.replace('/')
     }
   },
+  created() {
+    this.$noHttp()
+  }
 };
 </script>
 

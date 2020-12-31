@@ -23,7 +23,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
@@ -39,8 +39,13 @@ export default {
     'loading'
   ]),
   methods: {
+    ...mapMutations(['setLoading']),
   },
   created() {
+    Vue.prototype.$noHttp = () => {
+      this.setLoading(true);
+    }
+
     Vue.prototype.$fontSize = () => {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 10

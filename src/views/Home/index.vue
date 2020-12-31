@@ -2,24 +2,29 @@
   <div class="home">
     <Carousel @onLoad="carouselOnLoad" class="carousel" />
     <RecommPlayList @onLoad="RecommPlayListOnLoad" class="recomm" />
+    <SingerList title="热门歌手" :listData="popularSinger" />
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import Carousel from "./Carousel";
-import RecommPlayList from "./RecommPlayList";
+import { mapMutations } from 'vuex'
+import Carousel from './Carousel'
+import RecommPlayList from './RecommPlayList'
+import SingerList from '@/components/SingerList'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     Carousel,
     RecommPlayList,
+    SingerList
   },
   data: () => ({
+    popularSinger: [],
     onLoad: {
       carouse: false,
       RecommPlayList: false,
+      popularSinger: false
     },
   }),
   watch: {
@@ -35,17 +40,24 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(["setLoading"]),
+    ...mapMutations(['setLoading']),
     carouselOnLoad() {
       this.onLoad.carouse = true;
     },
     RecommPlayListOnLoad() {
       this.onLoad.RecommPlayList = true;
     },
+    // 获取热门歌手
+    getPopularSinger() {
+      this.$api.popularSinger({ limit: 6 }).then((res) => {
+        this.popularSinger = res.artists;
+        this.onLoad.popularSinger = true
+      });
+    }
   },
   created() {
-    this.setLoading(false);
-  },
+    this.getPopularSinger()
+  }
 };
 </script>
 
