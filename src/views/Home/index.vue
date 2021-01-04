@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Search />
     <Carousel @onLoad="carouselOnLoad" class="carousel" />
     <RecommPlayList @onLoad="RecommPlayListOnLoad" class="recomm" />
     <SingerList title="热门歌手" :listData="popularSinger" />
@@ -8,6 +9,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
+import Search from  '@/components/Search'
 import Carousel from './Carousel'
 import RecommPlayList from './RecommPlayList'
 import SingerList from '@/components/SingerList'
@@ -15,6 +17,7 @@ import SingerList from '@/components/SingerList'
 export default {
   name: 'Home',
   components: {
+    Search,
     Carousel,
     RecommPlayList,
     SingerList

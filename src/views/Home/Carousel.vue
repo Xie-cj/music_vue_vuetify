@@ -66,13 +66,6 @@ export default {
       return this.$fontSize();
     },
   },
-  // watch: {
-  //     banners(val) {
-  //         if(val.length) {
-  //             this.$emit('onLoad')
-  //         }
-  //     }
-  // }
 };
 </script>
 

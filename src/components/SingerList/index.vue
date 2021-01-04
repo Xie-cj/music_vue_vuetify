@@ -17,26 +17,7 @@
         xs="6"
       >
         <v-card outlined tile>
-          <v-hover class="" v-slot:default="{ hover }">
-            <div class="list-item">
-              <v-responsive
-                v-ripple
-                :class="{'hover elevation-8': hover || $fontSize() <= 10, 'large-size': $fontSize() > 10}"
-                class="transition rounded-circle bj05"
-                :aspect-ratio="1 / 1"
-              >
-                <div class="img-box">
-                  <v-img
-                    width="100%"
-                    height="100%"
-                    :src="item.picUrl"
-                    :lazy-src="`${item.picUrl}?param=27y27`"
-                  ></v-img>
-                </div>
-              </v-responsive>
-              <p :style="{ fontSize: $fontSize2() * 1.25 + 'px' }" class="name">{{item.name}}</p>
-            </div>            
-          </v-hover>          
+          <SingerListItem :item="item" />
         </v-card>
       </v-col>
     </v-row>
@@ -44,8 +25,13 @@
 </template>
 
 <script>
+  import SingerListItem from './SingerListItem'
+
   export default {
   name: 'popular-singer',
+  components: {
+    SingerListItem
+  },
   props: {
     title: {
       type: String,
@@ -77,23 +63,6 @@
         }
         ::v-deep .theme--light.v-card {
           background-color: transparent !important;
-        }
-        .list-item {
-          & > * {
-            transition: 0.25s;
-          }
-          .img-box {
-            width: 100%;
-            height: 100%;
-          }
-          .large-size.hover {
-            transform: scale(1.05);
-          }
-        }
-        .name {
-          margin: 10px 0 0 0;
-          text-align: center;
-          cursor: pointer;
         }
       }
     }
