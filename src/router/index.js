@@ -29,6 +29,11 @@ const routes = [
     component: () => import('../views/About')
   },
   {
+    path: '/search',
+    name: 'Search',
+    component: () => import('../views/Search')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/ErrorPage/404.vue')
@@ -70,7 +75,7 @@ router.afterEach((to, from) => {
   }
 })
 
-// 节流,给back添加500ms冷却时间
+// 节流,给back函数添加500ms冷却时间
 let state = true
 router.back = function() {
   if(state) {

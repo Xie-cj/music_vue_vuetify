@@ -3,7 +3,7 @@
     :style="{ marginTop: $fontSize() * 0.5 + 'px', fontSize: $fontSize() * 2 + 'px' }"
     class="popular-singer"
   >
-    <h2 style="font-size: 1em">{{ title }}</h2>
+    <h2 v-if="listData.length" style="font-size: 1em">{{ title }}</h2>
     <v-row class="list-box">
       <v-col
         class="list-item-container"
@@ -28,28 +28,28 @@
   import SingerListItem from './SingerListItem'
 
   export default {
-  name: 'popular-singer',
-  components: {
-    SingerListItem
-  },
-  props: {
-    title: {
-      type: String,
-      default: '歌手列表'
+    name: 'popular-singer',
+    components: {
+      SingerListItem
     },
-    listData: {
-      type: Array,
-      default: () => []
-    }
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    itemClick(item) {
-      console.log(item)
-    }
-  },
+    props: {
+      title: {
+        type: String,
+        default: '歌手列表'
+      },
+      listData: {
+        type: Array,
+        default: () => []
+      }
+    },
+    data() {
+      return {};
+    },
+    methods: {
+      itemClick(item) {
+        console.log(item)
+      }
+    },
   };
 </script>
 

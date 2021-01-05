@@ -12,6 +12,8 @@ Vue.prototype.$config = config
 import api from '@/config/api.js'
 Vue.prototype.$api = api
 
+Vue.prototype.$bus = new Vue()
+
 Vue.config.productionTip = false
 
 new Vue({

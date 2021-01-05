@@ -57,29 +57,29 @@
 </template>
 
 <script>
-export default {
-  name: "music-header",
-  data: () => ({
-    logoImg: require("@/assets/logo.png"),
-  }),
-  methods: {
-    back() {
-      if (this.$store.state.historyArr.length > 1) {
-        this.$router.back();
-      } else {
-        this.$route.name !== 'Home' &&
-          (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
-      }
+  export default {
+    name: "music-header",
+    data: () => ({
+      logoImg: require("@/assets/logo.png"),
+    }),
+    methods: {
+      back() {
+        if (this.$store.state.historyArr.length > 1) {
+          this.$router.back();
+        } else {
+          this.$route.name !== 'Home' &&
+            (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
+        }
+      },
     },
-  },
-  computed: {
-    foldHead() {
-      if (this.$fontSize() <= 12) {
-        return false;
-      } else {
-        return true;
-      }
+    computed: {
+      foldHead() {
+        if (this.$fontSize() <= 12) {
+          return false;
+        } else {
+          return true;
+        }
+      },
     },
-  },
-};
+  };
 </script>

@@ -12,6 +12,7 @@
     <MusicHeader />
     <v-main>
       <v-container>
+        <Search />
         <transition name="scroll-y-transition" mode="out-in">
           <router-view :style="{width: '100%', height: '100%'}"/>
         </transition>
@@ -24,12 +25,14 @@
 <script>
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
+import Search from  '@/views/Search/Search'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
 export default {
   name: 'App',
   components: {
+    Search,
     MusicHeader,
     MusicFooter
   },

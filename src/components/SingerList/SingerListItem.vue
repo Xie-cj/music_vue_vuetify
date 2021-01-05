@@ -23,17 +23,17 @@
 
 <script>
   export default {
-  name: '',
-  props: {
-    item: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  data() {
-    return {};
-  },
-  methods: {},
+    name: '',
+    props: {
+      item: {
+        type: Object,
+        default: () => {}
+      }
+    },
+    data() {
+      return {};
+    },
+    methods: {},
   };
 </script>
 
