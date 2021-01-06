@@ -75,12 +75,12 @@ export default {
   },
   methods: {
     bottomClick() {
-      if (this.$fontSize() < 12) {
+      if (this.$fontSize() === 10) {
         this.showDetails();
       }
     },
     showDetails() {
-      if (this.$fontSize() < 12) {
+      if (this.$fontSize() === 10) {
         setTimeout(() => {
           this.show = true;
         }, 250);

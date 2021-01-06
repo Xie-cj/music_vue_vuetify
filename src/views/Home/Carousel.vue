@@ -26,8 +26,8 @@
         <v-sheet
           class="badge"
           :style="{
-            fontSize: fontSize + 'px',
-            padding: `${fontSize / 4 + 'px'} ${fontSize / 2 + 'px'}`,
+            fontSize: $fontSize() + 'px',
+            padding: `${$fontSize() / 4 + 'px'} ${$fontSize() / 2 + 'px'}`,
           }"
           bottom
           inline
@@ -60,12 +60,7 @@ export default {
   },
   data: () => ({
     banners: [],
-  }),
-  computed: {
-    fontSize() {
-      return this.$fontSize();
-    },
-  },
+  })
 };
 </script>
 

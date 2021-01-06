@@ -11,9 +11,6 @@ export default {
     return {};
   },
   methods: {
-  },
-  created() {
-    this.$noHttp()
   }
 };
 </script>

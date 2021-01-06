@@ -74,7 +74,7 @@
     },
     computed: {
       foldHead() {
-        if (this.$fontSize() <= 12) {
+        if (this.$fontSize() === 10) {
           return false;
         } else {
           return true;

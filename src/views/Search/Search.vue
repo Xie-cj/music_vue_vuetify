@@ -1,52 +1,81 @@
 <template>
-  <div class="search-box" :class="{'large-size': $fontSize() > 12}">
+  <div
+    class="search-box"
+    :style="{top: `-${$fontSize() !== 10 ? $fontSize() > 12 ? '50' : '42' : '0'}px`}"
+    :class="{'large-size': $fontSize() > 10, active}"
+    v-click-outside="onClickOutside"
+  >
     <v-text-field
       ref="searchInput"
       class="search"
       append-icon="mdi-magnify"
       rounded
       dense
-      clearable
       solo
+      clearable
+      v-model="keyword"
       :label="defaultKeyword.showKeyword"
       :color="$config.mainColor"
-      v-model="keyword"
       @click:append="search"
       @keyup.enter="search"
       @focus="focus"
     >
     </v-text-field>
+    <transition name="slide-y-transition">
+      <SearchExpand
+        class="expand"
+        v-show="showExpand"
+        @close="onClickOutside"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
+  import SearchExpand from './SearchExpand'
+
   export default {
     name: 'search',
+    components: {
+      SearchExpand
+    },
     data: () => ({
       keyword: '', // // 搜索关键词
       defaultKeyword: {}, // 默认关键词
+      active: false, // 焦点是否在组件内
+      showExpand: false, // 是否显示搜索拓展
     }),
     methods: {
       // 搜索
       search() {
-        this.$router.replace({
+        let toParam = {
           name: 'Search',
           query: {
             keyword: this.keyword || this.defaultKeyword.realkeyword
           }
-        })
+        }
+        this.$route.name === 'Search'
+          ? this.$router.replace(toParam)
+          : this.$router.push(toParam)
         this.$refs.searchInput.blur()
       },
-      // 获取焦点时
+      // 获取焦点
       focus() {
-        if(this.$route.name !== 'Search') {
-          this.$router.push({
-            name: 'Search',
-            query: {
-              keyword: this.keyword || undefined
-            }
-          })
-        }
+        this.active = true
+        this.$fontSize() === 10
+          ? this.showExpand = true
+          : setTimeout(() => {
+            this.showExpand = true
+          }, 250)
+      },
+      // 点击组件外的元素（失去焦点）
+      onClickOutside() {
+        this.showExpand = false
+        this.$fontSize() === 10
+          ? this.active = false
+          : setTimeout(() => {
+              this.active = false
+            }, 250)
       }
     },
     created() {
@@ -60,9 +89,10 @@
 <style scoped lang="scss">
   .search-box {
     position: relative;
+    transition: .25s;
     ::v-deep .v-text-field {
-      padding: 0;
-      margin: 0 0 8px 0;
+      padding: 0 0 8px 0;
+      margin: 0;
       .v-text-field__details {
         display: none;
       }
@@ -72,9 +102,19 @@
     }
     &.large-size {
       position: absolute;
-      top: -50px;
       right: 13px;
-      width: 300px;
+      width: 220px;
+      &.active {
+        width: 300px;
+      }
+    }
+
+    .expand {
+      position: absolute;
+      z-index: 1;
+      top: calc(100% - 8px);
+      width: 100%;
+      height: 450px;
     }
   }
 </style>

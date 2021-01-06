@@ -15,10 +15,7 @@
         return this.$route.query.keyword
       }
     },
-    methods: {},
-    created() {
-      this.$noHttp()
-    }
+    methods: {}
   };
 </script>
 

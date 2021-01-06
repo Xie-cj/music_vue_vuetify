@@ -81,9 +81,6 @@ export default {
       this.$store.commit('setHistoryArr', [])
       this.$router.replace('/')
     }
-  },
-  created() {
-    this.$noHttp()
   }
 };
 </script>

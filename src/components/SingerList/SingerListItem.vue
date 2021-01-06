@@ -3,7 +3,7 @@
     <div class="list-item">
       <v-responsive
         v-ripple
-        :class="{'hover elevation-8': hover || $fontSize() <= 10, 'large-size': $fontSize() > 10}"
+        :class="{'hover elevation-8': hover || $fontSize() === 10, 'large-size': $fontSize() > 10}"
         class="transition rounded-circle bj05"
         :aspect-ratio="1 / 1"
       >
@@ -12,7 +12,6 @@
             width="100%"
             height="100%"
             :src="item.picUrl"
-            :lazy-src="`${item.picUrl}?param=27y27`"
           ></v-img>
         </div>
       </v-responsive>

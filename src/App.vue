@@ -45,10 +45,6 @@ export default {
     ...mapMutations(['setLoading']),
   },
   created() {
-    Vue.prototype.$noHttp = () => {
-      this.setLoading(true);
-    }
-
     Vue.prototype.$fontSize = () => {
       switch (this.$vuetify.breakpoint.name) {
         case 'xs': return 10
