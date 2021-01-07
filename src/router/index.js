@@ -11,6 +11,11 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
+// 改写replace方法
+const originalReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(location) {
+  return originalReplace.call(this, location).catch(err => err)
+}
 
 Vue.use(VueRouter)
 
@@ -31,7 +36,7 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../views/Search')
+    component: () => import('../views/SearchResults')
   },
   {
     path: '*',

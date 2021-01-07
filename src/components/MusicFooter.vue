@@ -1,5 +1,8 @@
 <template>
-  <v-container class="package">
+  <v-container
+    class="package"
+    :class="{'no-show': windowSize.y <= 520}"
+  >
     <v-dialog
       eager
       attach
@@ -55,6 +58,9 @@
             </div>
           </v-responsive>
         </v-hover>
+        <div class="content" :style="{ left: footerHeight, width: `calc(100% - ${footerHeight})` }">
+          {{windowSize}}
+        </div>
       </div>
     </v-footer>
   </v-container>
@@ -65,6 +71,12 @@ import PlayDetails from "./PlayDetails/";
 
 export default {
   name: "music-footer",
+  props: {
+    windowSize: {
+      type: Object,
+      default: () => {}
+    }
+  },
   components: {
     PlayDetails,
   },
@@ -112,8 +124,12 @@ export default {
 .package {
   padding: 0;
   position: sticky;
-  z-index: 6;
   bottom: 0;
+  z-index: 6;
+  transition: .25s;
+  &.no-show {
+    bottom: -100%;
+  }
   .music-footer {
     background-color: transparent !important;
     padding: 0 !important;
@@ -123,6 +139,7 @@ export default {
       background-color: #fff;
       margin: 0 auto;
       overflow: hidden;
+      position: relative;
       .shade {
         cursor: pointer;
         width: 100%;
@@ -136,6 +153,11 @@ export default {
         &.unfold {
           opacity: 1;
         }
+      }
+      .content{
+        position: absolute;
+        height: 100%;
+        top: 0;
       }
     }
   }

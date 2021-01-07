@@ -20,7 +20,7 @@ export default {
   },
   created() {
     setTimeout(() => {
-      this.imgUrl = "https://p2.music.126.net/rPrQVPau1RukWWU4u1UYqA==/109951165559573991.jpg";
+      this.imgUrl = "https://p2.music.126.net/ShJ7Kgh0lvGAUE83LTKzQg==/109951165121506557.jpg";
     }, 3500);
   },
 };
@@ -43,7 +43,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba($color: #000000, $alpha: 0.6);
+    background-color: rgba($color: #000000, $alpha: 0.45);
     backdrop-filter: blur(30px);
   }
 }

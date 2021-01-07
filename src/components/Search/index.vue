@@ -6,13 +6,14 @@
     v-click-outside="onClickOutside"
   >
     <v-text-field
-      ref="searchInput"
-      class="search"
-      append-icon="mdi-magnify"
       rounded
       dense
       solo
       clearable
+      autocomplete="off"
+      ref="searchInput"
+      class="search"
+      append-icon="mdi-magnify"
       v-model="keyword"
       :label="defaultKeyword.showKeyword"
       :color="$config.mainColor"
@@ -24,18 +25,27 @@
     <transition name="slide-y-transition">
       <SearchExpand
         class="expand"
+        :style="{maxHeight: (windowSize.y - 120) + 'px'}"
         v-show="showExpand"
         @close="onClickOutside"
+        @search="searchHistoryClick"
       />
     </transition>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   import SearchExpand from './SearchExpand'
 
   export default {
     name: 'search',
+    props: {
+      windowSize: {
+        type: Object,
+        default: () => {}
+      }
+    },
     components: {
       SearchExpand
     },
@@ -46,6 +56,13 @@
       showExpand: false, // 是否显示搜索拓展
     }),
     methods: {
+      ...mapMutations([
+        'addSearchHistory'
+      ]),
+      searchHistoryClick(keyword) {
+        this.keyword = keyword
+        this.search()
+      },
       // 搜索
       search() {
         let toParam = {
@@ -58,6 +75,8 @@
           ? this.$router.replace(toParam)
           : this.$router.push(toParam)
         this.$refs.searchInput.blur()
+        this.onClickOutside()
+        this.addSearchHistory(toParam.query.keyword)
       },
       // 获取焦点
       focus() {
@@ -111,10 +130,10 @@
 
     .expand {
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       top: calc(100% - 8px);
       width: 100%;
-      height: 450px;
+      height: 350px;
     }
   }
 </style>

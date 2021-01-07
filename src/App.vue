@@ -1,6 +1,6 @@
 <template>
-  <v-app :style="{backgroundColor: $config.bjColor}">
-    <v-overlay @touchmove.stop.prevent :value="!loading" z-index="9">
+  <v-app v-resize="onResize" :style="{backgroundColor: $config.bjColor}">
+    <v-overlay :value="!loading" z-index="9">
       <v-progress-circular
         :size="70"
         :width="7"
@@ -12,20 +12,20 @@
     <MusicHeader />
     <v-main>
       <v-container>
-        <Search />
+        <Search :windowSize="windowSize" />
         <transition name="scroll-y-transition" mode="out-in">
-          <router-view :style="{width: '100%', height: '100%'}"/>
+          <router-view :style="{width: '100%', height: '100%'}" />
         </transition>
       </v-container>
     </v-main>
-    <MusicFooter />
+    <MusicFooter :windowSize="windowSize" />
   </v-app>
 </template>
 
 <script>
 import Vue from 'vue'
 import { mapState, mapMutations } from 'vuex'
-import Search from  '@/views/Search/Search'
+import Search from  '@/components/Search'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
 
@@ -37,12 +37,19 @@ export default {
     MusicFooter
   },
   data: () => ({
+    windowSize: {
+      x: 0,
+      y: 0,
+    },
   }),
   computed: mapState([
     'loading'
   ]),
   methods: {
     ...mapMutations(['setLoading']),
+    onResize () {
+      this.windowSize = { x: window.innerWidth, y: window.innerHeight }
+    },
   },
   created() {
     Vue.prototype.$fontSize = () => {
@@ -63,15 +70,16 @@ export default {
         case 'xl': return 16
       }
     }
-  }
+  },
+  mounted () {
+    this.onResize()
+  },
 };
 </script>
 
 <style lang="scss">
-
-
 :root {
-  &::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 0;
   }
 }

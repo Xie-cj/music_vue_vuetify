@@ -10,6 +10,7 @@ const Home = {
 // 搜索
 const Search = {
   searchDefault: p => get('/search/default'), // 默认搜索关键词
+  searchHot: p => get('/search/hot/detail'), // 热门搜索
 }
 
 export default {
