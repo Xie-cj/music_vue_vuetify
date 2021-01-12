@@ -35,7 +35,9 @@ export default {
   },
   // 删除搜索历史
   deleteSearchHistory(state, item) {
-    state.searchHistory.splice(state.searchHistory.indexOf(item), 1)
+    item === 'all'
+      ? state.searchHistory = []
+      : state.searchHistory.splice(state.searchHistory.indexOf(item), 1)
     sessionStorage.setItem('searchHistory', state.searchHistory)
   }
 }

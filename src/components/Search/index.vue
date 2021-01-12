@@ -29,6 +29,7 @@
         v-show="showExpand"
         @close="onClickOutside"
         @search="searchHistoryClick"
+        @getFocus="getFocus"
       />
     </transition>
   </div>
@@ -76,7 +77,9 @@
           : this.$router.push(toParam)
         this.$refs.searchInput.blur()
         this.onClickOutside()
-        this.addSearchHistory(toParam.query.keyword)
+        setTimeout(() => {
+          this.addSearchHistory(toParam.query.keyword)
+        }, this.$config.animationTime)
       },
       // 获取焦点
       focus() {
@@ -85,7 +88,7 @@
           ? this.showExpand = true
           : setTimeout(() => {
             this.showExpand = true
-          }, 250)
+          }, this.$config.animationTime)
       },
       // 点击组件外的元素（失去焦点）
       onClickOutside() {
@@ -94,14 +97,19 @@
           ? this.active = false
           : setTimeout(() => {
               this.active = false
-            }, 250)
+            }, this.$config.animationTime)
+      },
+      getFocus() {
+        setTimeout(() => {
+          this.$refs.searchInput.focus()
+        }, 275)
       }
     },
     created() {
       this.$api.searchDefault().then(res => {
         this.defaultKeyword = res.data
       })
-    }
+    },
   };
 </script>
 

@@ -10,7 +10,7 @@
       v-model="show"
       transition="slide-y-reverse-transition"
     >
-      <PlayDetails @close="show = false" />
+      <PlayDetails @close="closeDetails" />
     </v-dialog>
     <v-footer class="music-footer">
       <div
@@ -95,10 +95,20 @@ export default {
       if (this.$fontSize() === 10) {
         setTimeout(() => {
           this.show = true;
-        }, 250);
+          this.pushHistory()
+        }, this.$config.animationTime);
       } else {
         this.show = true;
+        this.pushHistory()
       }
+    },
+    closeDetails() {
+      this.show = false
+    },
+    pushHistory() {
+      // 向历史记录中插入了当前页
+      history.pushState(null, null, document.URL);
+      window.addEventListener('popstate', this.closeDetails, false);
     },
   },
   computed: {

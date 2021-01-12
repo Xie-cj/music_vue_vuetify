@@ -1,8 +1,9 @@
 <template>
   <div
     class="play-details"
-    :style="{ backgroundImage: `url(${imgUrl}?param=128y128)` }"
+    :style="{ backgroundImage: BJ_ImgUrl }"
   >
+    <img :src="`${imgUrl}?param=128y128`" @load="loadImage" style="display: none;" />
     <div class="content">
       <div class="top"></div>
       <span @click="$emit('close')">×</span>
@@ -16,11 +17,17 @@ export default {
   data() {
     return {
       imgUrl: "https://p1.music.126.net/pI-Nf1Y7IIckBEIhGGR8mA==/109951165572687041.jpg",
+      BJ_ImgUrl: ''
     };
+  },
+  methods: {
+    loadImage() {
+      this.BJ_ImgUrl = `url(${this.imgUrl}?param=128y128)`
+    }
   },
   created() {
     setTimeout(() => {
-      this.imgUrl = "https://p2.music.126.net/ShJ7Kgh0lvGAUE83LTKzQg==/109951165121506557.jpg";
+      this.imgUrl = "https://p2.music.126.net/zr7uprB86pCc6H9HWu2avw==/109951165621877409.jpg";
     }, 3500);
   },
 };
@@ -37,6 +44,9 @@ export default {
   background-size: cover;
   background-position: center;
   transition: background-image 1s;
+  ::v-deep .v-image__image {
+    transition: .25s;
+  }
   .content {
     width: 100%;
     height: 100%;

@@ -7,7 +7,7 @@
     >mdi-chevron-up</v-icon>
     <!-- 搜索历史 -->
     <div class="search-history" v-show="searchHistory.length">
-      <p class="title">搜索历史</p>
+      <p class="title">搜索历史 <v-icon @click="clickDeleteAll">mdi-delete</v-icon></p>
       <div class="search-history-box">
         <v-hover
           v-for="item in searchHistory"
@@ -54,6 +54,33 @@
         </li>
       </ul>
     </div>
+    <!-- 弹出框 -->
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+      :retain-focus="false"
+    >
+      <v-card>
+        <v-card-title>确定删除历史记录?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            取消
+          </v-btn>
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteAll()"
+          >
+            确定
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -64,6 +91,7 @@
     name: 'search-expand',
     data() {
       return {
+        dialog: false,
         hotList: []
       };
     },
@@ -75,7 +103,16 @@
     methods: {
       ...mapMutations([
         'deleteSearchHistory'
-      ])
+      ]),
+      clickDeleteAll() {
+        this.$emit('close')
+        this.dialog = true
+      },
+      deleteAll() {
+        this.deleteSearchHistory('all')
+        this.$emit('getFocus')
+        this.dialog = false
+      }
     },
     created() {
       this.$api.searchHot().then(res => {
