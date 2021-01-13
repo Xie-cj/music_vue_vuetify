@@ -2,12 +2,13 @@
   <v-container
     class="package"
     :class="{'no-show': windowSize.y <= 520}"
+    :style="{ height: footerHeight }"
   >
     <v-dialog
       eager
-      attach
       fullscreen
       v-model="show"
+      attach="#app"
       transition="slide-y-reverse-transition"
     >
       <PlayDetails @close="closeDetails" />
@@ -59,7 +60,7 @@
           </v-responsive>
         </v-hover>
         <div class="content" :style="{ left: footerHeight, width: `calc(100% - ${footerHeight})` }">
-          {{windowSize}}
+          {{windowSize.y}}
         </div>
       </div>
     </v-footer>
@@ -95,17 +96,17 @@ export default {
       if (this.$fontSize() === 10) {
         setTimeout(() => {
           this.show = true;
-          this.pushHistory()
-        }, this.$config.animationTime);
+          this.pushURL()
+        }, this.$theme.animationTime);
       } else {
         this.show = true;
-        this.pushHistory()
+        this.pushURL()
       }
     },
     closeDetails() {
       this.show = false
     },
-    pushHistory() {
+    pushURL() {
       // 向历史记录中插入了当前页
       history.pushState(null, null, document.URL);
       window.addEventListener('popstate', this.closeDetails, false);
@@ -133,19 +134,23 @@ export default {
 <style scoped lang="scss">
 .package {
   padding: 0;
-  position: sticky;
-  bottom: 0;
-  z-index: 6;
-  transition: .25s;
-  &.no-show {
+  width: 100%;
+  &.no-show .music-footer{
     bottom: -100%;
   }
   .music-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
     background-color: transparent !important;
     padding: 0 !important;
+    transition: .25s .25s;
     .footer-main {
       width: 100%;
-      max-width: 1400px;
+      max-width: 1200px;
       background-color: #fff;
       margin: 0 auto;
       overflow: hidden;

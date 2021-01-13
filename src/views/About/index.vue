@@ -6,11 +6,16 @@
 
 <script>
 export default {
-  name: "not-found",
+  name: "about",
   data() {
-    return {};
+    return {
+
+    };
   },
   methods: {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+</style>

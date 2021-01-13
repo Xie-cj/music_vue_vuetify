@@ -9,8 +9,8 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import Carousel from './Carousel'
-import RecommPlayList from './RecommPlayList'
+import Carousel from './components/Carousel'
+import RecommPlayList from './components/RecommPlayList'
 import SingerList from '@/components/SingerList'
 
 export default {

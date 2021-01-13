@@ -32,7 +32,7 @@
           bottom
           inline
           v-if="item.typeTitle"
-          :color="item.titleColor || $config.mainColor"
+          :color="item.titleColor || $theme.mainColor"
           v-text="item.typeTitle"
         ></v-sheet>
       </v-carousel-item>

@@ -16,7 +16,7 @@
       append-icon="mdi-magnify"
       v-model="keyword"
       :label="defaultKeyword.showKeyword"
-      :color="$config.mainColor"
+      :color="$theme.mainColor"
       @click:append="search"
       @keyup.enter="search"
       @focus="focus"
@@ -79,7 +79,7 @@
         this.onClickOutside()
         setTimeout(() => {
           this.addSearchHistory(toParam.query.keyword)
-        }, this.$config.animationTime)
+        }, this.$theme.animationTime)
       },
       // 获取焦点
       focus() {
@@ -88,7 +88,7 @@
           ? this.showExpand = true
           : setTimeout(() => {
             this.showExpand = true
-          }, this.$config.animationTime)
+          }, this.$theme.animationTime)
       },
       // 点击组件外的元素（失去焦点）
       onClickOutside() {
@@ -97,7 +97,7 @@
           ? this.active = false
           : setTimeout(() => {
               this.active = false
-            }, this.$config.animationTime)
+            }, this.$theme.animationTime)
       },
       getFocus() {
         setTimeout(() => {

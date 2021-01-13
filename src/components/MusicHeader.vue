@@ -4,13 +4,13 @@
       <v-app-bar
         app
         dark
-        :color="$config.mainColor"
+        :color="$theme.mainColor"
         :collapse="!hover && foldHead"
         min-width="180"
       >
         <transition name="scale-transition">
           <v-btn
-            style="position: absolute"
+            style="position: absolute; left: 16px;"
             v-show="hover || !foldHead"
             fab
             dark
@@ -31,26 +31,45 @@
             </v-icon>
           </v-btn>
         </transition>
+
         <div
           style="width: 100%;"
           class="d-flex justify-center align-center"
         >
           <div
-            style="cursor: pointer;"
             class="d-flex align-center"
+            :style="{cursor: 'pointer'}"
             @click="$router.push('/about')"
           >
-            <v-img
-              alt="Vuetify Logo"
-              class="shrink mr-2"
-              contain
-              :src="logoImg"
-              transition="scale-transition"
-              width="40"
-            />
+            <div class="logo-box" :style="{backgroundColor: $theme.mainColor}">
+              <img
+                class="logo"
+                alt="logo"
+                :src="logoImg"
+                :width="30 + $fontSize()"
+              >
+            </div>
             <span class="text-h5">{{ $config.title }}</span>
           </div>
         </div>
+
+        <transition name="scale-transition">
+          <v-btn
+            style="position: absolute; right: 16px;"
+            v-show="hover || !foldHead"
+            fab
+            dark
+            small
+            color="rgba(255,255,255,.15)"
+            @click.stop="$router.push('/setting')"
+          >
+            <v-icon
+              transition="scale-transition"
+            >
+              mdi-cog-outline
+            </v-icon>
+          </v-btn>
+        </transition>
       </v-app-bar>
     </v-hover>
   </div>
@@ -67,8 +86,8 @@
         if (this.$store.state.historyArr.length > 1) {
           this.$router.back();
         } else {
-          this.$route.name !== 'Home' &&
-            (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
+          this.$route.name !== 'Home'
+            && (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
         }
       },
     },
@@ -83,3 +102,17 @@
     },
   };
 </script>
+
+<style lang="scss" scoped>
+.logo-box {
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color;
+  margin-right: 5px;
+  
+  .logo {
+    transition: .25s;
+    vertical-align: middle;
+    mix-blend-mode: hard-light;
+  }
+}
+  
+</style>

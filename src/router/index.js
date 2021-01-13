@@ -39,6 +39,11 @@ const routes = [
     component: () => import('../views/SearchResults')
   },
   {
+    path: '/setting',
+    name: 'Setting',
+    component: () => import('../views/Setting')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/ErrorPage/404.vue')

@@ -36,7 +36,7 @@
         <v-progress-circular
           :size="30"
           :width="4"
-          :color="$config.mainColor"
+          :color="$theme.mainColor"
           indeterminate
         ></v-progress-circular>
       </p>
