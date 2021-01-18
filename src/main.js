@@ -11,10 +11,6 @@ import '@/plugins'
 import config from '@/config'
 Vue.prototype.$config = config
 
-// 主题
-import theme from '@/config/theme'
-Vue.prototype.$theme = Vue.observable(theme)
-
 // 接口
 import api from '@/config/api.js'
 Vue.prototype.$api = api

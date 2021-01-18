@@ -36,7 +36,7 @@
         <v-progress-circular
           :size="30"
           :width="4"
-          :color="$theme.mainColor"
+          :color="$store.state.theme.mainColor"
           indeterminate
         ></v-progress-circular>
       </p>
@@ -67,7 +67,7 @@
           <v-btn
             color="green darken-1"
             text
-            @click="dialog = false"
+            @click="closeAndGetFocus()"
           >
             取消
           </v-btn>
@@ -110,6 +110,9 @@
       },
       deleteAll() {
         this.deleteSearchHistory('all')
+        this.closeAndGetFocus()
+      },
+      closeAndGetFocus() {
         this.$emit('getFocus')
         this.dialog = false
       }

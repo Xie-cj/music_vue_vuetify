@@ -97,7 +97,7 @@ export default {
         setTimeout(() => {
           this.show = true;
           this.pushURL()
-        }, this.$theme.animationTime);
+        }, this.$store.state.theme.animationTime);
       } else {
         this.show = true;
         this.pushURL()

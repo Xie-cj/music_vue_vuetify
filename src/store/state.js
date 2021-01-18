@@ -4,5 +4,11 @@ export default {
   // 路由历史记录
   historyArr: sessionStorage.getItem('historyArr') ? sessionStorage.getItem('historyArr').split(',') : [],
   // 搜索历史
-  searchHistory: sessionStorage.getItem('searchHistory') ? sessionStorage.getItem('searchHistory').split(',') : []
+  searchHistory: localStorage.getItem('searchHistory') ? localStorage.getItem('searchHistory').split(',') : [],
+  // 主题
+  theme: {
+    mainColor: localStorage.getItem('mainColor') || '#1e88e5', // 主题色
+    bjColor: '#f9f9f9', // 页面背景色
+    animationTime: 250, // 动画时间
+  }
 }

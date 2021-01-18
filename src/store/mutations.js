@@ -5,8 +5,7 @@ export default {
       state.loading = value
       document.querySelector('html').style.overflow = 'hidden'
     } else {
-      // 加载提示至少保持0.5s
-      setTimeout(() => {
+      setTimeout(() => { // 加载提示至少保持0.5s
         state.loading = value
         document.querySelector('html').style.overflow = ''
       }, 500);
@@ -27,17 +26,22 @@ export default {
           state.searchHistory.splice(0, 0, item)
         )
       : state.searchHistory.unshift(item)
-    // 只保留10个历史
-    if(state.searchHistory.length > 10) {
+    if(state.searchHistory.length > 10) { // 只保留10个历史
       state.searchHistory.length = 10
     }
-    sessionStorage.setItem('searchHistory', state.searchHistory)
+    localStorage.setItem('searchHistory', state.searchHistory)
   },
   // 删除搜索历史
   deleteSearchHistory(state, item) {
     item === 'all'
       ? state.searchHistory = []
       : state.searchHistory.splice(state.searchHistory.indexOf(item), 1)
-    sessionStorage.setItem('searchHistory', state.searchHistory)
+      localStorage.setItem('searchHistory', state.searchHistory)
+  },
+
+  // 设置主题色
+  setMainColor(state, value) {
+    state.theme.mainColor = value
+    localStorage.setItem('mainColor', state.theme.mainColor)
   }
 }

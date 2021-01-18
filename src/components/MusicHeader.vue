@@ -4,7 +4,7 @@
       <v-app-bar
         app
         dark
-        :color="$theme.mainColor"
+        :color="$store.state.theme.mainColor"
         :collapse="!hover && foldHead"
         min-width="180"
       >
@@ -41,7 +41,7 @@
             :style="{cursor: 'pointer'}"
             @click="$router.push('/about')"
           >
-            <div class="logo-box" :style="{backgroundColor: $theme.mainColor}">
+            <div class="logo-box" :style="{backgroundColor: $store.state.theme.mainColor}">
               <img
                 class="logo"
                 alt="logo"
