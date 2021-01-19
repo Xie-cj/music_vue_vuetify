@@ -1,12 +1,22 @@
 <template>
-  <div
-    class="play-details"
-    :style="{ backgroundImage: BJ_ImgUrl }"
-  >
-    <img :src="`${imgUrl}?param=128y128`" @load="loadImage" style="display: none;" />
+  <div class="play-details">
+    <!-- 背景 -->
+    <div class="bj-box">
+      <!-- 图片加载完成后执行loadImage事件 -->
+      <img :src="`${imgUrl}?param=128y128`" @load="loadImage" style="display: none;" />
+      <img class="bj-img"  :src="`${BJ_ImgUrl}?param=128y128`" />
+      <img class="before-img" ref="beforeImg" :src="`${BJ_ImgUrl_D}?param=128y128`" />
+    </div>
+    <!-- 内容 -->
     <div class="content">
-      <div class="top"></div>
-      <span @click="$emit('close')">×</span>
+      <div class="top">
+        <v-icon
+          x-large
+          @click="$emit('close')"
+          color="#fff"
+        >mdi-chevron-down</v-icon>
+      </div>
+      <span @click="testSwitch">切换</span>
     </div>
   </div>
 </template>
@@ -17,18 +27,42 @@ export default {
   data() {
     return {
       imgUrl: "https://p1.music.126.net/pI-Nf1Y7IIckBEIhGGR8mA==/109951165572687041.jpg",
-      BJ_ImgUrl: ''
+      BJ_ImgUrl: '',
+      BJ_ImgUrl_D: '',
+      timer: 0,
+
+      testImgs: [
+        'https://p2.music.126.net/o_OjL_NZNoeog9fIjBXAyw==/18782957139233959.jpg',
+        'https://p2.music.126.net/m3nu__bH_6yEHTT2-VEgqw==/109951165604255385.jpg',
+        'http://p1.music.126.net/ob48GYsWClv2FomlqhdntQ==/109951165641875889.jpg'
+      ],
+      testIndex: 0
     };
   },
   methods: {
     loadImage() {
-      this.BJ_ImgUrl = `url(${this.imgUrl}?param=128y128)`
+      if(this.BJ_ImgUrl !== this.imgUrl) {
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
+          this.$refs.beforeImg.style = 'opacity: 0;'
+          this.BJ_ImgUrl = this.imgUrl
+          setTimeout(() => {
+            this.BJ_ImgUrl_D = this.imgUrl
+            this.$refs.beforeImg.style = ''
+          }, 500)
+        }, 750)
+      }
+    },
+
+    testSwitch() {
+      if(this.testIndex < this.testImgs.length) {
+        this.imgUrl = this.testImgs[this.testIndex++]
+      }
+      else {
+        this.testIndex = 0
+        this.imgUrl = "https://p1.music.126.net/pI-Nf1Y7IIckBEIhGGR8mA==/109951165572687041.jpg"
+      }
     }
-  },
-  created() {
-    setTimeout(() => {
-      this.imgUrl = "https://p2.music.126.net/zr7uprB86pCc6H9HWu2avw==/109951165621877409.jpg";
-    }, 3500);
   },
 };
 </script>
@@ -44,17 +78,46 @@ export default {
   background-size: cover;
   background-position: center;
   transition: background-image 1s;
-  ::v-deep .v-image__image {
-    transition: .25s;
+  .bj-box {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    bottom: -10%;
+    left: -10%;
+    .bj-img,
+    .before-img {
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      filter: blur(30px);
+    }
+    .bj-img {
+      z-index: -1;
+    }
+    .before-img {
+      transition: 1s;
+      opacity: 1;
+      z-index: 0;
+    }
   }
+
   .content {
+    font-size: 16px;
+    color: #fff;
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba($color: #000000, $alpha: 0.45);
-    backdrop-filter: blur(30px);
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    // backdrop-filter: blur(30px);
+    .top {
+      height: 40px;
+    }
   }
 }
 </style>
