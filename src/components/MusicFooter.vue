@@ -28,7 +28,7 @@
           >
             <v-img
               height="100%"
-              :src="'https://p2.music.126.net/rPrQVPau1RukWWU4u1UYqA==/109951165559573991.jpg'"
+              :src="'https://p2.music.126.net/o_OjL_NZNoeog9fIjBXAyw==/18782957139233959.jpg'"
             ></v-img>
             <div
               class="shade"
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import PlayDetails from "./PlayDetails/";
+import PlayDetails from "./PlayDetails";
 
 export default {
   name: "music-footer",
@@ -105,6 +105,7 @@ export default {
     },
     closeDetails() {
       this.show = false
+      window.removeEventListener('popstate', this.closeDetails, false);
     },
     pushURL() {
       // 向历史记录中插入了当前页

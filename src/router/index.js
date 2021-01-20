@@ -31,26 +31,44 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import('../views/About')
+    component: () => import('../views/About'),
+    meta: {
+      title: '关于'
+    }
   },
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../views/SearchResults')
+    component: () => import('../views/SearchResults'),
+    meta: {
+      title: '搜索'
+    }
   },
   {
     path: '/setting',
     name: 'Setting',
+    component: () => import('../views/Setting'),
+    meta: {
+      title: '设置'
+    }
+  },
+  {
+    path: '/playDetails',
+    name: 'playDetails',
     component: () => import('../views/Setting')
   },
   {
     path: '*',
     name: '404',
-    component: () => import('../views/ErrorPage/404.vue')
+    component: () => import('../views/ErrorPage/404.vue'),
+    meta: {
+      title: '找不到页面'
+    }
   }
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

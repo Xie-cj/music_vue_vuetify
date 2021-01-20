@@ -39,7 +39,7 @@
           <div
             class="d-flex align-center"
             :style="{cursor: 'pointer'}"
-            @click="$router.push('/about')"
+            @click="topClick()"
           >
             <div class="logo-box" :style="{backgroundColor: $store.state.theme.mainColor}">
               <img
@@ -90,6 +90,13 @@
             && (this.$store.commit('setHistoryArr', []), this.$router.replace('/'));
         }
       },
+      topClick() {
+        if(this.$route.name === 'Home') {
+          this.$router.push('/about')
+        } else {
+          this.$router.push('/')
+        }
+      }
     },
     computed: {
       foldHead() {

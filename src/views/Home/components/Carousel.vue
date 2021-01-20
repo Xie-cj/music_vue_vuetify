@@ -11,12 +11,12 @@
       height="100%"
       hide-delimiter-background
       delimiter-icon="mdi-minus"
-      :show-arrows="$vuetify.breakpoint.name !== 'xs' && Boolean(banners.length)"
+      :show-arrows="$vuetify.breakpoint.name !== 'xs' && Boolean(bannersFilter.length)"
       show-arrows-on-hover
     >
       <v-carousel-item
         class="carousel-item"
-        v-for="(item, index) in banners"
+        v-for="(item, index) in bannersFilter"
         :key="index"
         :src="`${item.imageUrl}?param=1080y400`"
         :lazy-src="`${item.imageUrl}?param=270y100`"
@@ -55,12 +55,27 @@ export default {
       });
     },
     bannerClick(item) {
-      console.log(item);
+      // targetType: 1 单曲, 10 专辑, 1004 MV
+      console.log(
+        {
+          '1': '单曲',
+          '10': '专辑',
+          '1004': 'MV'
+        }[item.targetType],
+        'id:' + item.targetId
+      );
     },
   },
   data: () => ({
     banners: [],
-  })
+  }),
+  computed: {
+    bannersFilter() {
+      return this.banners.filter(item => {
+        return [1, 10, 1004].includes(item.targetType)
+      })
+    }
+  }
 };
 </script>
 
