@@ -35,7 +35,7 @@ export default {
         if (Object.values(val).includes(false)) {
           isLoading = false;
         }
-        this.setLoading(isLoading)
+        this.setLoading(!isLoading)
       },
       deep: true,
     },
@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    this.setLoading(false)
+    this.setLoading(true)
     this.getPopularSinger()
   }
 };

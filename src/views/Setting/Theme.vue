@@ -9,15 +9,25 @@
     ></i>
     <br />
     <span class="title">自定义颜色：</span>
-    <v-color-picker
-      class="ma-2"
-      mode="hexa"
-      width="375"
-      v-model="inputColor"
-      show-swatches
-      :swatches="colors"
-      @input="setMainColor(inputColor)"
-    ></v-color-picker>
+    <div v-click-outside="onClickOutside">
+      <i
+        class="theme-item"
+        :style="{backgroundColor: $store.state.theme.mainColor}"
+        @click="show = !show"
+      ></i>
+      <transition name="slide-y-transition">
+        <v-color-picker
+          v-show="show"
+          class="pick-color"
+          mode="hexa"
+          width="375"
+          v-model="inputColor"
+          show-swatches
+          :swatches="colors"
+          @input="setMainColor(inputColor)"
+        ></v-color-picker>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -26,6 +36,7 @@
     name: 'theme-box',
     data() {
       return {
+        show: false,
         inputColor: this.$store.state.theme.mainColor,
         colors: [
           ['#F44336', '#E91E63', '#9C27B0'],
@@ -40,6 +51,9 @@
     methods: {
       setMainColor(value) {
         this.$store.commit('setMainColor', value)
+      },
+      onClickOutside() {
+        this.show = false
       }
     },
     computed: {

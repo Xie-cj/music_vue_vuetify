@@ -17,7 +17,7 @@ axios.defaults.timeout = timeout;
 export function get(url, params, showLoading = false) {
   params ? params.withCredentials = true : params = { withCredentials: true }
   return new Promise((resolve, reject) => {
-    showLoading && store.commit('setLoading', false)
+    showLoading && store.commit('setLoading', true)
     axios.get(url, {
       params: params
     }).then(res => {
@@ -25,7 +25,7 @@ export function get(url, params, showLoading = false) {
     }).catch(err => {
       reject(err)
     }).finally(() => {
-      showLoading && store.commit('setLoading', true)
+      showLoading && store.commit('setLoading', false)
     })
   })
 }

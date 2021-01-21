@@ -109,7 +109,7 @@ export default {
     },
     pushURL() {
       // 向历史记录中插入了当前页
-      history.pushState(null, null, document.URL);
+      // history.pushState(null, null, document.URL);
       window.addEventListener('popstate', this.closeDetails, false);
     },
   },

@@ -1,6 +1,6 @@
 <template>
   <v-app v-resize="onResize" :style="{backgroundColor: $config.bjColor}">
-    <v-overlay :value="!loading" z-index="9">
+    <v-overlay :value="loading" z-index="9">
       <v-progress-circular
         :size="70"
         :width="7"

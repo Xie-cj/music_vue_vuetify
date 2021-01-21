@@ -1,7 +1,7 @@
 export default {
   // 设置全局加载提示
   setLoading(state, value) {
-    if(!value) {
+    if(value) {
       state.loading = value
       document.querySelector('html').style.overflow = 'hidden'
     } else {

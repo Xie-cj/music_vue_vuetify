@@ -56,7 +56,7 @@
         <transition name="scale-transition">
           <v-btn
             style="position: absolute; right: 16px;"
-            v-show="hover || !foldHead"
+            v-show="(hover || !foldHead) && $route.name !== 'Setting'"
             fab
             dark
             small

@@ -29,6 +29,14 @@ const routes = [
     }
   },
   {
+    path: '/playlist',
+    name: 'Playlist',
+    component: () => import('../views/Playlist'),
+    meta: {
+      title: '专辑'
+    }
+  },
+  {
     path: '/about',
     name: 'About',
     component: () => import('../views/About'),
@@ -83,12 +91,14 @@ const router = new VueRouter({
 // })
 
 router.afterEach((to, from) => {
-  document.title = title
   if (to.meta.title) {
     document.title = `${to.meta.title} - ${title}`
   } else {
     document.title = title
   }
+
+  // 跳转页面后关闭加载loading
+  store.commit('setLoading', false)
 
   // 记录路由
   if(to.name !== from.name) {
