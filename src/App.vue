@@ -1,14 +1,8 @@
 <template>
   <v-app v-resize="onResize" :style="{backgroundColor: $config.bjColor}">
-    <v-overlay :value="loading" z-index="9">
-      <v-progress-circular
-        :size="70"
-        :width="7"
-        :color="$store.state.theme.mainColor"
-        indeterminate
-      ></v-progress-circular>
-    </v-overlay>
-
+    <!-- 全局loading -->
+    <Loading />
+    <!-- 主要内容 -->
     <MusicHeader />
     <v-main>
       <v-container>
@@ -24,7 +18,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapMutations } from 'vuex'
+import Loading from '@/components/common/Loading'
 import Search from  '@/components/Search'
 import MusicHeader from '@/components/MusicHeader'
 import MusicFooter from '@/components/MusicFooter'
@@ -32,6 +26,7 @@ import MusicFooter from '@/components/MusicFooter'
 export default {
   name: 'App',
   components: {
+    Loading,
     Search,
     MusicHeader,
     MusicFooter
@@ -42,11 +37,7 @@ export default {
       y: 0,
     },
   }),
-  computed: mapState([
-    'loading'
-  ]),
   methods: {
-    ...mapMutations(['setLoading']),
     onResize () {
       this.windowSize = { x: window.innerWidth, y: window.innerHeight }
     },

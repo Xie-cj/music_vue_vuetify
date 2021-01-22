@@ -9,7 +9,7 @@
     </div>
     <!-- 内容 -->
     <div class="content">
-      <div class="top">
+      <div class="top" :style="{fontSize: 10 + $fontSize() + 'px'}">
         <v-btn
           fab
           dark
@@ -19,11 +19,17 @@
         >
           <v-icon x-large>mdi-chevron-down</v-icon>
         </v-btn>
-        <div class="text" :style="{fontSize: 10 + $fontSize() + 'px'}">
-          <span class="song-name">歌名</span>
-          <span class="singer">歌手</span>
-        </div>
-        <div>123</div>
+        <span class="song-name">歌名</span>
+        <v-btn
+          fab
+          dark
+          dense
+          small
+          color="rgba(255,255,255, 0)"
+          @click.stop="$emit('close')"
+        >
+          <v-icon large>mdi-dots-vertical</v-icon>
+        </v-btn>
       </div>
       <span @click="testSwitch">切换</span>
     </div>
@@ -128,18 +134,12 @@ export default {
         padding: 5px;
         display: flex;
         justify-content: space-between;
-        // align-items: center;
-        .text {
-          color: #fff;
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          .song-name {
-            font-size: 1em;
-          }
-          .singer {
-            font-size: .75em;
-          }
+        align-items: center;
+        .song-name {
+          font-size: 1em;
+        }
+        .singer {
+          font-size: .75em;
         }
       }
     }
