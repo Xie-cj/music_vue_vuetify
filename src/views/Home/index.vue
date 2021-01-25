@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Carousel @onLoad="carouselOnLoad" class="carousel" />
-    <RecommPlayList @onLoad="RecommPlayListOnLoad" class="recomm" />
+    <RecommPlayList @onLoad="recommPlayListOnLoad" class="recomm" />
     <SingerList title="热门歌手" :listData="popularSinger" />
   </div>
 </template>
@@ -45,7 +45,7 @@ export default {
     carouselOnLoad() {
       this.onLoad.carouse = true;
     },
-    RecommPlayListOnLoad() {
+    recommPlayListOnLoad() {
       this.onLoad.RecommPlayList = true;
     },
     // 获取热门歌手
@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    this.setLoading(true)
+    // this.setLoading(true)
     this.getPopularSinger()
   }
 };

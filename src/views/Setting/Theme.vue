@@ -9,7 +9,7 @@
     ></i>
     <br />
     <span class="title">自定义颜色：</span>
-    <div v-click-outside="onClickOutside">
+    <div v-click-outside="onClickOutside" style="display: inline-block;">
       <i
         class="theme-item"
         :style="{backgroundColor: $store.state.theme.mainColor}"

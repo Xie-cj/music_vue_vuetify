@@ -1,7 +1,7 @@
 <template>
   <div class="album">
     <div v-if="id">
-      album
+      {{id}}
     </div>
     <div v-else>
       id不能为空
@@ -17,7 +17,13 @@
         id: 0
       };
     },
-    methods: {},
+    methods: {
+      getData() {
+      }
+    },
+    mounted() {
+      this.getData()
+    },
     created() {
       this.id = this.$route.query.id
       this.$api.playlist({

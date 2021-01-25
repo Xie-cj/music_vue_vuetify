@@ -33,7 +33,7 @@ const routes = [
     name: 'Playlist',
     component: () => import('../views/Playlist'),
     meta: {
-      title: '专辑'
+      title: '歌单'
     }
   },
   {
