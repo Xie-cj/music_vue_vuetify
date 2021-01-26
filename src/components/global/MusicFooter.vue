@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import PlayDetails from "./PlayDetails";
+import PlayDetails from "@/components/PlayDetails";
 
 export default {
   name: "music-footer",

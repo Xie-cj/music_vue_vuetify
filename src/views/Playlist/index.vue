@@ -1,5 +1,5 @@
 <template>
-  <div class="album">
+  <div class="playlist">
     <div v-if="id">
       {{id}}
     </div>
@@ -11,7 +11,7 @@
 
 <script>
   export default {
-    name: 'album',
+    name: 'playlist',
     data() {
       return {
         id: 0
@@ -19,6 +19,11 @@
     },
     methods: {
       getData() {
+        this.$api.playlist({
+          id: this.id
+        }, true).then(res => {
+          console.log(res)
+        })
       }
     },
     mounted() {
@@ -26,16 +31,11 @@
     },
     created() {
       this.id = this.$route.query.id
-      this.$api.playlist({
-        id: this.id
-      }).then(res => {
-        console.log(res)
-      })
     }
   };
 </script>
 
 <style scoped lang="scss">
-  .album {
+  .playlist {
   }
 </style>

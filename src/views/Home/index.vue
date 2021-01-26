@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Carousel @onLoad="carouselOnLoad" class="carousel" />
-    <RecommPlayList @onLoad="recommPlayListOnLoad" class="recomm" />
+    <Carousel :banners="banners" class="carousel" />
+    <RecommPlayList :listData="recommPlayList" class="recomm" />
     <SingerList title="热门歌手" :listData="popularSinger" />
   </div>
 </template>
@@ -21,44 +21,29 @@ export default {
     SingerList
   },
   data: () => ({
-    popularSinger: [],
-    onLoad: {
-      carouse: false,
-      RecommPlayList: false,
-      popularSinger: false
-    },
+    banners: [],
+    popularSinger: undefined,
+    recommPlayList: undefined,
   }),
-  watch: {
-    onLoad: {
-      handler(val) {
-        let isLoading = true;
-        if (Object.values(val).includes(false)) {
-          isLoading = false;
-        }
-        this.setLoading(!isLoading)
-      },
-      deep: true,
-    },
-  },
   methods: {
     ...mapMutations(['setLoading']),
-    carouselOnLoad() {
-      this.onLoad.carouse = true;
+    getData() {
+      this.setLoading(true)
+      Promise.all([
+        this.$api.banner(),
+        this.$api.personalized({ limit: 6 }),
+        this.$api.popularSinger({ limit: 6 })
+      ]).then(resArr => {
+        this.banners = resArr[0].banners
+        this.recommPlayList = resArr[1].result
+        this.popularSinger = resArr[2].artists
+      }).finally(() => {
+        this.setLoading(false)
+      })
     },
-    recommPlayListOnLoad() {
-      this.onLoad.RecommPlayList = true;
-    },
-    // 获取热门歌手
-    getPopularSinger() {
-      this.$api.popularSinger({ limit: 6 }).then((res) => {
-        this.popularSinger = res.artists;
-        this.onLoad.popularSinger = true
-      });
-    }
   },
   created() {
-    // this.setLoading(true)
-    this.getPopularSinger()
+    this.getData()
   }
 };
 </script>

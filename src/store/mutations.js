@@ -5,10 +5,10 @@ export default {
       state.loading = value
       document.querySelector('html').style.overflow = 'hidden'
     } else {
-      setTimeout(() => { // 加载提示至少保持0.5s
+      setTimeout(() => { // 加载提示至少保持0.75s
         state.loading = value
         document.querySelector('html').style.overflow = ''
-      }, 500);
+      }, 750);
     }
   },
 

@@ -43,17 +43,13 @@
 <script>
 export default {
   name: "Home",
-  components: {},
-  created() {
-    this.getBanner();
+  props: {
+    banners: {
+      type: Array,
+      default: () => []
+    }
   },
   methods: {
-    getBanner() {
-      this.$api.banner().then((res) => {
-        this.banners = res.banners;
-        this.$emit("onLoad");
-      });
-    },
     bannerClick(item) {
       // targetType: 1 单曲, 10 专辑, 1004 MV
       console.log(
@@ -67,7 +63,6 @@ export default {
     },
   },
   data: () => ({
-    banners: [],
   }),
   computed: {
     bannersFilter() {

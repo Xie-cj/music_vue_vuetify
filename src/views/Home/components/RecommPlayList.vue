@@ -53,17 +53,20 @@ export default {
       type: String,
       default: "推荐歌单",
     },
-  },
-  data() {
-    return {
-      listData: [
+    listData: {
+      type: Array,
+      default: () => [
         { id: 1 },
         { id: 2 },
         { id: 3 },
         { id: 4 },
         { id: 5 },
         { id: 6 },
-      ],
+      ]
+    }
+  },
+  data() {
+    return {
     };
   },
   methods: {
@@ -76,12 +79,6 @@ export default {
         }
       })
     },
-  },
-  created() {
-    this.$api.personalized({ limit: 6 }).then((res) => {
-      this.listData = res.result;
-      this.$emit("onLoad");
-    });
   },
   computed: {
     fontSize() {

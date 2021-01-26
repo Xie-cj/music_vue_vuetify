@@ -80,25 +80,12 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   document.title = title
-//   if (to.meta.title) {
-//     document.title = `${to.meta.title} - ${title}`
-//   } else {
-//     document.title = title
-//   }
-//   next()
-// })
-
 router.afterEach((to, from) => {
   if (to.meta.title) {
     document.title = `${to.meta.title} - ${title}`
   } else {
     document.title = title
   }
-
-  // 跳转页面后关闭加载loading
-  store.commit('setLoading', false)
 
   // 记录路由
   if(to.name !== from.name) {

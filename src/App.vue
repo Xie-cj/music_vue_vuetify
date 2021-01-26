@@ -18,10 +18,10 @@
 
 <script>
 import Vue from 'vue'
-import Loading from '@/components/common/Loading'
-import Search from  '@/components/Search'
-import MusicHeader from '@/components/MusicHeader'
-import MusicFooter from '@/components/MusicFooter'
+import Loading from '@/components/global/Loading'
+import Search from  '@/components/global/Search'
+import MusicHeader from '@/components/global/MusicHeader'
+import MusicFooter from '@/components/global/MusicFooter'
 
 export default {
   name: 'App',

@@ -28,7 +28,7 @@
           color="rgba(255,255,255, 0)"
           @click.stop="$emit('close')"
         >
-          <v-icon>mdi-dots-vertical</v-icon>
+          <v-icon style="font-size: 30px;">mdi-dots-vertical</v-icon>
         </v-btn>
       </div>
       <span @click="testSwitch">切换</span>

@@ -20,7 +20,7 @@
           v-show="show"
           class="pick-color"
           mode="hexa"
-          width="375"
+          width="350"
           v-model="inputColor"
           show-swatches
           :swatches="colors"
