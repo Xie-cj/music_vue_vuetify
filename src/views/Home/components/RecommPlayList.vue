@@ -28,7 +28,7 @@
                 width="100%"
                 height="100%"
                 :src="item.picUrl"
-                :lazy-src="`${item.picUrl}?param=27y27`"
+                :lazy-src="`${item.picUrl}?param=64y64`"
               ></v-img>
               <div
                 v-show="item.name"

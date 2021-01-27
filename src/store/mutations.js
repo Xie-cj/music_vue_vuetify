@@ -43,5 +43,10 @@ export default {
   setMainColor(state, value) {
     state.theme.mainColor = value
     localStorage.setItem('mainColor', state.theme.mainColor)
+  },
+
+  // 设置message
+  setMessage(state, value) {
+    state.message = value
   }
 }

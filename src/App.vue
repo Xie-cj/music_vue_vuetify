@@ -2,8 +2,11 @@
   <v-app v-resize="onResize" :style="{backgroundColor: $config.bjColor}">
     <!-- 全局loading -->
     <Loading />
-    <!-- 主要内容 -->
+    <!-- 全局消息框 -->
+    <Message />
+    <!-- 顶部 -->
     <MusicHeader />
+    <!-- 主要内容 -->
     <v-main>
       <v-container>
         <Search :windowSize="windowSize" />
@@ -12,6 +15,7 @@
         </transition>
       </v-container>
     </v-main>
+    <!-- 底部 -->
     <MusicFooter :windowSize="windowSize" />
   </v-app>
 </template>
@@ -19,6 +23,7 @@
 <script>
 import Vue from 'vue'
 import Loading from '@/components/global/Loading'
+import Message from '@/components/global/Message'
 import Search from  '@/components/global/Search'
 import MusicHeader from '@/components/global/MusicHeader'
 import MusicFooter from '@/components/global/MusicFooter'
@@ -27,6 +32,7 @@ export default {
   name: 'App',
   components: {
     Loading,
+    Message,
     Search,
     MusicHeader,
     MusicFooter

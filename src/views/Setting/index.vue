@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import Theme from './Theme'
+  import Theme from './components/Theme'
 
   export default {
     name: 'setting',

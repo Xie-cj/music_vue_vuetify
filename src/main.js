@@ -15,8 +15,18 @@ Vue.prototype.$config = config
 import api from '@/config/api.js'
 Vue.prototype.$api = api
 
+// 全局message方法
+Vue.prototype.$message = (content, color = 'info', timeout = 3000, isShow = true) => {
+  store.commit('setMessage', {
+    content,
+    color,
+    timeout,
+    isShow
+  })
+}
+
 // 事件总线
-Vue.prototype.$bus = new Vue()
+// Vue.prototype.$bus = new Vue()
 
 Vue.config.productionTip = false
 

@@ -37,6 +37,8 @@ export default {
         this.banners = resArr[0].banners
         this.recommPlayList = resArr[1].result
         this.popularSinger = resArr[2].artists
+      }).catch(() => {
+        this.$message(`获取首页数据失败，请稍后重试`, 'error', 6000)
       }).finally(() => {
         this.setLoading(false)
       })

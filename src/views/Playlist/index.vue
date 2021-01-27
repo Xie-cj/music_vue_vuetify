@@ -23,6 +23,8 @@
           id: this.id
         }, true).then(res => {
           console.log(res)
+        }).catch(() => {
+          this.$message('获取歌单信息失败，请稍后重试', 'error', 6000)
         })
       }
     },

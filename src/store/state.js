@@ -5,6 +5,13 @@ export default {
   historyArr: sessionStorage.getItem('historyArr') ? sessionStorage.getItem('historyArr').split(',') : [],
   // 搜索历史
   searchHistory: localStorage.getItem('searchHistory') ? localStorage.getItem('searchHistory').split(',') : [],
+  // 全局消息框
+  message: {
+    content: '',
+    color: '',
+    timeout: -1,
+    isShow: false
+  },
   // 主题
   theme: {
     mainColor: localStorage.getItem('mainColor') || '#1e88e5', // 主题色
