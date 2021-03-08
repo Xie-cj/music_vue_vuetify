@@ -14,7 +14,8 @@
     name: 'playlist',
     data() {
       return {
-        id: 0
+        id: 0,
+        playlistInfo: {},
       };
     },
     methods: {
@@ -22,6 +23,9 @@
         this.$api.playlist({
           id: this.id
         }, true).then(res => {
+          if (res.code === 200) {
+            
+          }
           console.log(res)
         }).catch(() => {
           this.$message('获取歌单信息失败，请稍后重试', 'error', 6000)

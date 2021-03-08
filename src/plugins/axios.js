@@ -56,7 +56,7 @@ axios.interceptors.response.use(
 
 // 导出get方法
 export function get(url, params, showLoading = false) {
-  params ? params.withCredentials = true : params = { withCredentials: true }
+  // params ? params.withCredentials = true : params = { withCredentials: true }
   return new Promise((resolve, reject) => {
     showLoading && store.commit('setLoading', true)
     axios.get(url, {

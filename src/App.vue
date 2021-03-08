@@ -1,5 +1,5 @@
 <template>
-  <v-app v-resize="onResize" :style="{backgroundColor: $config.bjColor}">
+  <v-app v-resize="onResize" :style="{backgroundColor: $store.state.theme.bjColor}">
     <!-- 全局loading -->
     <Loading />
     <!-- 全局消息框 -->

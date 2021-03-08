@@ -43,6 +43,8 @@
       transition: 0.25s;
     }
     .img-box {
+      border-radius: 50%;
+      overflow: hidden;
       width: 100%;
       height: 100%;
     }
