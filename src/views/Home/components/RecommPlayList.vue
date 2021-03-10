@@ -71,9 +71,8 @@ export default {
   },
   methods: {
     itemClick(item) {
-      console.log(item);
       this.$router.push({
-        name: 'SongList',
+        name: 'Playlist',
         query: {
           id: item.id
         }

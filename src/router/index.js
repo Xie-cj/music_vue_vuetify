@@ -29,9 +29,9 @@ const routes = [
     }
   },
   {
-    path: '/songList',
-    name: 'SongList',
-    component: () => import('../views/SongList'),
+    path: '/playlist',
+    name: 'Playlist',
+    component: () => import('../views/Playlist'),
     meta: {
       title: '歌单'
     }

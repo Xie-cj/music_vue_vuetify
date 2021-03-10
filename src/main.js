@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 
+// 样式
+import '@/assets/style/style.scss'
+
 // 插件
 import '@/plugins'
 
