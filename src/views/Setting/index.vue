@@ -11,7 +11,7 @@
   export default {
     name: 'setting',
     components: {
-      Theme
+      Theme,
     },
     data() {
       return {

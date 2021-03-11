@@ -12,7 +12,7 @@
     },
     computed: {
       keyword() {
-        return this.$route.query.keyword
+        return this.$route.params.keyword
       }
     },
     methods: {}

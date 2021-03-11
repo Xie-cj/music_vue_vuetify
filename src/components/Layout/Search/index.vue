@@ -37,7 +37,7 @@
 
 <script>
   import { mapMutations } from 'vuex'
-  import SearchExpand from './SearchExpand'
+  import SearchExpand from './components/SearchExpand'
 
   export default {
     name: 'search',
@@ -68,7 +68,7 @@
       search() {
         let toParam = {
           name: 'Search',
-          query: {
+          params: {
             keyword: this.keyword || this.defaultKeyword.realkeyword
           }
         }
@@ -78,7 +78,7 @@
         this.$refs.searchInput.blur()
         this.onClickOutside()
         setTimeout(() => {
-          this.addSearchHistory(toParam.query.keyword)
+          this.addSearchHistory(toParam.params.keyword)
         }, this.$store.state.theme.animationTime)
       },
       // 获取焦点

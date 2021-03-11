@@ -41,7 +41,7 @@
             :style="{cursor: 'pointer'}"
             @click="topClick()"
           >
-            <div class="logo-box" :style="{backgroundColor: $store.state.theme.mainColor}">
+            <div class="logo-box">
               <img
                 class="logo"
                 alt="logo"
@@ -114,6 +114,7 @@
 .logo-box {
   transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1) background-color;
   margin-right: 5px;
+  background-color: var(--mainColor);
   
   .logo {
     transition: .25s;

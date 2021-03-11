@@ -29,11 +29,19 @@ const routes = [
     }
   },
   {
-    path: '/playlist',
+    path: '/playlist/:id',
     name: 'Playlist',
     component: () => import('../views/Playlist'),
     meta: {
       title: '歌单'
+    }
+  },
+  {
+    path: '/artists/:id',
+    name: 'Artists',
+    component: () => import('../views/Artists'),
+    meta: {
+      title: '歌手'
     }
   },
   {
@@ -45,7 +53,7 @@ const routes = [
     }
   },
   {
-    path: '/search',
+    path: '/search/:keyword',
     name: 'Search',
     component: () => import('../views/SearchResults'),
     meta: {
@@ -61,11 +69,6 @@ const routes = [
     }
   },
   {
-    path: '/playDetails',
-    name: 'playDetails',
-    component: () => import('../views/Setting')
-  },
-  {
     path: '*',
     name: '404',
     component: () => import('../views/ErrorPage/404.vue'),
@@ -77,7 +80,14 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 })
+      }, store.state.theme.animationTime)
+    })
+  }
 })
 
 router.afterEach((to, from) => {

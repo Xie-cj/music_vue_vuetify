@@ -73,7 +73,7 @@ export default {
     itemClick(item) {
       this.$router.push({
         name: 'Playlist',
-        query: {
+        params: {
           id: item.id
         }
       })

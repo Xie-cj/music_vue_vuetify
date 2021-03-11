@@ -20,37 +20,36 @@
           ></v-img>
         </v-responsive>
         
-        <div class="playlist-info-header-text" :style="{width: `calc(100% - ${$fontSize() * 4 + 80}px - 12px)`, fontSize: `calc(${$fontSize() / 2}px + 8px)`}">
-          <p class="playlist-info-header-text-name">
+        <div
+          class="playlist-info-header-text"
+          :style="{
+            width: `calc(100% - ${$fontSize() * 4 + 80}px - 12px)`,
+            fontSize: `calc(${$fontSize() / 2}px + 8px)`
+          }"
+        >
+          <div class="playlist-info-header-text-name" v-if="playlist.name">
             <span
-              v-if="playlist.name"
-              class="tag"
-              :style="{
-                color: $store.state.theme.mainColor,
-                border: `${$store.state.theme.mainColor} 1px solid`
-              }"
+              class="type"
             >歌单</span>
             {{playlist.name}}
-          </p>
-          <p class="playlist-info-header-text-description">
-            {{playlist.description}}
-          </p>
+          </div>
+          <div class="playlist-info-header-text-tags" v-if="playlist.tags && playlist.tags.length">
+            标签：{{playlist.tags.join(' / ')}}
+          </div>
+          <div class="playlist-info-header-text-description" v-if="playlist.description">
+            <v-tooltip max-width="700" bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <span class="description" v-bind="attrs" v-on="on">{{playlist.description}}</span>
+              </template>
+              <span>
+                {{playlist.description}}
+              </span>
+            </v-tooltip>
+          </div>
         </div>
       </v-col>
     </v-row>
-    <h2 :style="{fontSize: $fontSize() + 10 + 'px'}" style="margin-bottom: 10px;">
-      歌曲列表
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon style="font-size: 1em; vertical-align: unset;" v-bind="attrs" v-on="on">mdi-alert-circle</v-icon>
-        </template>
-        <span>
-          由于网易云官方的限制<br />
-          未登录时歌单为不完整歌单<br />
-          （本项目不支持登录）
-        </span>
-      </v-tooltip>
-    </h2>
+    <h2 :style="{fontSize: $fontSize() + 10 + 'px'}" style="margin-bottom: 10px;">歌曲列表</h2>
     <SongList :songList="songList"/>
   </div>
 </template>
@@ -67,12 +66,8 @@
       return {
         id: 0,
         playlist: {},
+        songList: []
       };
-    },
-    computed: {
-      songList() {
-        return this.playlist.tracks
-      }
     },
     methods: {
       getData() {
@@ -85,9 +80,14 @@
         }, true).then(res => {
           if (res.code === 200) {
             this.playlist = res.playlist
+            this.$api.songDetail({
+              ids: this.playlist.trackIds.map(item => item.id).join(',')
+            }, false).then(res => {
+              if (res.code === 200) {
+                this.songList = res.songs
+              }
+            })
           }
-        }).catch(() => {
-          this.$message('获取歌单信息失败，请稍后重试', 'error', 6000)
         })
       }
     },
@@ -95,7 +95,7 @@
       this.getData()
     },
     created() {
-      this.id = this.$route.query.id
+      this.id = this.$route.params.id
     }
   };
 </script>
@@ -116,21 +116,30 @@
           &-name {
             @include ellipsisBasic();
             font-size: 1.3em;
-            .tag {
+            margin-bottom: .4em;
+            .type {
               font-size: .8em;
               display: inline-block;
               padding: 0 8px;
               border-radius: 5px;
               margin-right: 3px;
               vertical-align: middle;
+              color: var(--mainColor);
+              border: var(--mainColor) solid 1px;
             }
           }
+          &-tags {
+            @include ellipsisBasic(1);
+            margin-bottom: .4em;
+          }
           &-description {
-            @include ellipsisBasic(3);
             color: #333;
             font-size: .9em;
             margin-bottom: 0;
             font-weight: lighter;
+            .description {
+              @include ellipsisBasic(2);
+            }
           }
         }
       }

@@ -1,18 +1,12 @@
 <template>
-  <div class="paly-list">
-    paly-list
+  <div class="artists">
+    artists
   </div>
 </template>
 
 <script>
   export default {
-    name: 'palyList',
-    props: {
-      palyList: {
-        type: Array,
-        default: () => []
-      }
-    },
+    name: 'artists',
     data() {
       return {};
     },
@@ -21,6 +15,6 @@
 </script>
 
 <style scoped lang="scss">
-  .paly-list {
+  .artists {
   }
 </style>

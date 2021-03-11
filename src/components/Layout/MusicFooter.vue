@@ -15,7 +15,7 @@
     </v-dialog>
     <v-footer class="music-footer">
       <div
-        v-ripple
+        v-ripple="$fontSize() < 12"
         @click.stop="bottomClick()"
         :style="{ height: footerHeight }"
         class="footer-main elevation-6 rounded-t"

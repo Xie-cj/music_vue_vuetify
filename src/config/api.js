@@ -9,6 +9,7 @@ const Home = {
 
 // 歌曲/专辑/歌单
 const Song = {
+  songDetail: (p, showLoading) => get('song/detail', p, showLoading), // 歌曲详情
   playlist: (p, showLoading) => get('/playlist/detail', p, showLoading), // 歌单详情
   album: (p, showLoading) => get('/album', p, showLoading), // 专辑
 }

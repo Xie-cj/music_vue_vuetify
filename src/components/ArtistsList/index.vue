@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ marginTop: $fontSize() * 0.5 + 'px', fontSize: $fontSize() * 2 + 'px' }"
-    class="popular-singer"
+    class="artists-list"
   >
     <h2 v-if="listData.length" style="font-size: 1em">{{ title }}</h2>
     <v-row class="list-box">
@@ -17,7 +17,7 @@
         xs="6"
       >
         <v-card outlined tile>
-          <SingerListItem :item="item" />
+          <ArtistsListItem :item="item" />
         </v-card>
       </v-col>
     </v-row>
@@ -25,12 +25,12 @@
 </template>
 
 <script>
-  import SingerListItem from './SingerListItem'
+  import ArtistsListItem from './components/ArtistsListItem'
 
   export default {
-    name: 'popular-singer',
+    name: 'artists',
     components: {
-      SingerListItem
+      ArtistsListItem
     },
     props: {
       title: {
@@ -47,14 +47,17 @@
     },
     methods: {
       itemClick(item) {
-        console.log(item)
+        this.$router.push({
+          name: 'Artists',
+          params: { id: item.id }
+        })
       }
     },
   };
 </script>
 
 <style scoped lang="scss">
-  .popular-singer {
+  .artists-list {
     .list-box {
       .list-item-container {
         cursor: pointer;

@@ -5,10 +5,10 @@ export default {
       state.loading = value
       document.querySelector('html').style.overflow = 'hidden'
     } else {
-      setTimeout(() => { // 加载提示至少保持0.75s
+      setTimeout(() => { // 加载提示至少保持0.5s
         state.loading = value
         document.querySelector('html').style.overflow = ''
-      }, 750);
+      }, 500);
     }
   },
 
@@ -36,7 +36,7 @@ export default {
     item === 'all'
       ? state.searchHistory = []
       : state.searchHistory.splice(state.searchHistory.indexOf(item), 1)
-      localStorage.setItem('searchHistory', state.searchHistory)
+    localStorage.setItem('searchHistory', state.searchHistory)
   },
 
   // 设置主题色

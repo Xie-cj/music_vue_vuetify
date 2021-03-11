@@ -2,7 +2,7 @@
   <div class="home">
     <Carousel :banners="banners" class="carousel" />
     <RecommPlayList :listData="recommPlayList" class="recomm" />
-    <SingerList title="热门歌手" :listData="popularSinger" />
+    <ArtistsList title="热门歌手" :listData="popularSinger" />
   </div>
 </template>
 
@@ -11,14 +11,14 @@ import { mapMutations } from 'vuex'
 
 import Carousel from './components/Carousel'
 import RecommPlayList from './components/RecommPlayList'
-import SingerList from '@/components/SingerList'
+import ArtistsList from '@/components/ArtistsList'
 
 export default {
   name: 'Home',
   components: {
     Carousel,
     RecommPlayList,
-    SingerList
+    ArtistsList
   },
   data: () => ({
     banners: [],
