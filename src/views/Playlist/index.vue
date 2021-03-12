@@ -15,6 +15,7 @@
           :aspect-ratio="1 / 1"
         >
           <v-img
+            v-show="playlist.coverImgUrl"
             :src="playlist.coverImgUrl"
             :lazy-src="playlist.coverImgUrl + '?param=64y64'"
           ></v-img>
@@ -22,10 +23,6 @@
         
         <div
           class="playlist-info-header-text"
-          :style="{
-            width: `calc(100% - ${$fontSize() * 4 + 80}px - 12px)`,
-            fontSize: `calc(${$fontSize() / 2}px + 8px)`
-          }"
         >
           <div class="playlist-info-header-text-name" v-if="playlist.name">
             <span
@@ -49,7 +46,7 @@
         </div>
       </v-col>
     </v-row>
-    <h2 :style="{fontSize: $fontSize() + 10 + 'px'}" style="margin-bottom: 10px;">歌曲列表</h2>
+    <h2 style="margin-bottom: 10px; font-size: calc(var(--fontSize) + 10px)">歌曲列表</h2>
     <SongList :songList="songList"/>
   </div>
 </template>
@@ -91,11 +88,13 @@
         })
       }
     },
-    mounted() {
-      this.getData()
-    },
-    created() {
-      this.id = this.$route.params.id
+    activated() {
+      if (this.$route.params.id != this.id) {
+        this.id = this.$route.params.id
+        this.playlist = {}
+        this.songList = []
+        this.getData()
+      }
     }
   };
 </script>
@@ -113,6 +112,8 @@
           height: 100%;
           overflow: hidden;
           margin-left: 12px;
+          font-size: calc(var(--fontSize) / 2 + 8px);
+          width: calc(100% - (var(--fontSize) * 4 + 80px) - 12px);
           &-name {
             @include ellipsisBasic();
             font-size: 1.3em;

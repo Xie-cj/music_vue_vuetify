@@ -1,8 +1,5 @@
 <template>
-  <div
-    :style="{ marginTop: $fontSize() * 0.5 + 'px', fontSize: $fontSize() * 2 + 'px' }"
-    class="artists-list"
-  >
+  <div class="artists-list">
     <h2 v-if="listData.length" style="font-size: 1em">{{ title }}</h2>
     <v-row class="list-box">
       <v-col
@@ -58,6 +55,8 @@
 
 <style scoped lang="scss">
   .artists-list {
+    margin-top: calc(var(--fontSize) / 2);
+    font-size: calc(var(--fontSize) * 2);
     .list-box {
       .list-item-container {
         cursor: pointer;

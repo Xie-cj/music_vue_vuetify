@@ -25,10 +25,6 @@
       >
         <v-sheet
           class="badge"
-          :style="{
-            fontSize: $fontSize() + 'px',
-            padding: `${$fontSize() / 4 + 'px'} ${$fontSize() / 2 + 'px'}`,
-          }"
           bottom
           inline
           v-if="item.typeTitle"
@@ -88,6 +84,8 @@ export default {
       bottom: 0;
       padding: 3px 6px;
       border-radius: 9px 0 0 0;
+      font-size: var(--fontSize);
+      padding: calc(var(--fontSize) / 4) calc(var(--fontSize) / 2);
     }
   }
   ::v-deep .v-carousel__controls {

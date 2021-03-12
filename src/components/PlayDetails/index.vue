@@ -9,7 +9,7 @@
     </div>
     <!-- 内容 -->
     <div class="content">
-      <div class="top" :style="{fontSize: 10 + $fontSize() + 'px'}">
+      <div class="top">
         <v-btn
           fab
           dark
@@ -135,6 +135,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        font-size: calc(10px + var(--fontSize));
         .song-name {
           font-size: 1em;
         }

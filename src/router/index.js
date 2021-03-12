@@ -82,11 +82,24 @@ const router = new VueRouter({
   mode: 'history',
   routes,
   scrollBehavior (to, from, savedPosition) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ x: 0, y: 0 })
-      }, store.state.theme.animationTime)
-    })
+    if (savedPosition) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(savedPosition)
+        }, store.state.theme.animationTime)
+      })
+    } else {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ x: 0, y: 0 })
+        }, store.state.theme.animationTime)
+      })
+    }
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve({ x: 0, y: 0 })
+    //   }, store.state.theme.animationTime)
+    // })
   }
 })
 

@@ -4,7 +4,8 @@
     class="app"
     :style="{
       backgroundColor: $store.state.theme.bjColor,
-      '--mainColor': $store.state.theme.mainColor
+      '--mainColor': $store.state.theme.mainColor,
+      '--fontSize': $fontSize() + 'px'
     }"
   >
     <!-- 全局loading -->
@@ -17,9 +18,11 @@
     <v-main>
       <v-container>
         <Search :windowSize="windowSize" />
-        <transition name="scroll-y-transition" mode="out-in">
-          <router-view :style="{width: '100%', height: '100%'}" />
-        </transition>
+          <transition name="scroll-y-transition" mode="out-in">
+            <keep-alive>
+              <router-view :style="{width: '100%', height: '100%'}" />
+            </keep-alive>
+          </transition>
       </v-container>
     </v-main>
     <!-- 底部 -->
