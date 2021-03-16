@@ -134,6 +134,7 @@
             margin-bottom: .4em;
           }
           &-description {
+            cursor: pointer;
             color: #333;
             font-size: .9em;
             margin-bottom: 0;
