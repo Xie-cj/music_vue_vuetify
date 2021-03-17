@@ -7,10 +7,13 @@
           :key="item.id" >
         <li
           class="song-list-ul-li"
-          :class="(hover && $fontSize() >= 12) ? 'hover' : ''"
+          :class="(hover && $fontSize() > 12) ? 'hover' : ''"
           @click="songClick(item)"
         >
-          <div class="text" v-ripple="$fontSize() < 12 ? true : false">
+          <div class="text"
+            v-ripple="$fontSize() < 12 ? true : false"
+            :style="{paddingRight: $fontSize() < 12 ? '30px' : ''}"
+          >
             <span class="index">
               <v-icon v-if="item.id === selcetId" :color="$store.state.theme.mainColor" :style="{fontSize: $fontSize() + 18 + 'px'}">mdi-volume-low</v-icon>
               <template v-else>
@@ -18,27 +21,38 @@
               </template>
             </span>
             <div class="song-info">
-              <div class="name" :class="item.id === selcetId ? 'active' : ''">{{item.name}}</div>
+              <div class="name" :class="item.id === selcetId ? 'active' : ''">
+                {{item.name}}
+              </div>
               <div class="artists">
                 <span
                   class="artists-item"
                   v-for="artists in item.ar"
-                  :key="artists.id"
+                  :key="artists.id || artists.name"
                 >
                   <span
+                    v-if="artists.id"
                     class="artists-item-name"
                     :class="$fontSize() >= 12 ? 'active' : ''"
-                    @click="goArtists(artists)"
+                    @click.stop="goArtists(artists)"
+                  >{{artists.name}}</span>
+                  <span
+                    v-else
+                    class="artists-item-name"
+                    @click.stop="goArtists(artists)"
                   >{{artists.name}}</span>
                 </span>
               </div>
             </div>
           </div>
-          <div class="function">
+          <div
+            class="function"
+            :style="{width: $fontSize() > 10 ? '30%' : ''}"
+          >
             <div class="large" v-show="$fontSize() > 10">
               <span
                 class="album"
-                :class="$fontSize() >= 12 ? 'active' : ''"
+                :class="$fontSize() >= 12 ? 'hover' : ''"
               >{{item.al.name}}</span>
               <span class="duration">{{item.dt | msToMin}}</span>
             </div>
@@ -78,7 +92,7 @@
     },
     methods: {
       goArtists(artists) {
-        if (this.$fontSize() < 12) {
+        if (this.$fontSize() < 12 || !artists.id) {
           return
         }
         this.$router.push({
@@ -118,6 +132,7 @@
         .text {
           display: flex;
           width: 100%;
+          padding-right: 30%;
           .index {
             font-size: 1em;
             display: flex;
@@ -131,10 +146,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-width: calc(100% - 40px);
             .name {
               display: inline-block;
               width: 100%;
               transition: .25s;
+              position: relative;
               @include ellipsisBasic(1);
               &.active {
                 color: var(--mainColor);
@@ -160,7 +177,6 @@
                 &-name {
                   color: #999;
                   text-decoration: none;
-                  cursor: pointer;
                   &.active:hover {
                     color: #333;
                   }
@@ -175,11 +191,19 @@
           right: 0;
           height: 100%;
           .large {
+            width: 100%;
+            height: 100%;
+            padding: 0 10px;
             font-size: 1em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             .album {
+              font-size: .9em;
               color: #999;
-              &.active:hover {
-                color: #333;;
+              @include ellipsisBasic(1);
+              &.hover:hover {
+                color: #333;
               }
             }
           }
